@@ -9,7 +9,11 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLabel">listes des recettes</h5>
-                    <h1 class=" text-rose-600 text-lg font-bold">{{ compter }}</h1>
+                    
+                    <div class="flex">
+                        <img src="../images/panier.png" alt="" class="w-12 h-12">
+                        <h1 class=" text-rose-600 text-lg font-bold">{{ compter }}</h1>
+                    </div>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">X</button>
                 </div>
                 <div class="modal-body">
