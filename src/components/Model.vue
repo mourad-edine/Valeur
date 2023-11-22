@@ -1,5 +1,5 @@
 <template>
-    <button type="button" class="bg-yellow-500 text-white p-2 m-4" data-bs-toggle="modal" data-bs-target="#exampleModal">
+    <button type="button" class="bg-yellow-500 text-white p-2 m-4 rounded" data-bs-toggle="modal" data-bs-target="#exampleModal">
         voir le menue
     </button>
     
@@ -19,7 +19,7 @@
                 <div class="modal-body">
                     <div class="grid grid-cols-2">
                         <div v-for="item in produits" data-bs-toggle="modal" data-bs-target="#supplement"
-                            class="cursor-pointer hover:bg-slate-200 p-2 rounded">
+                            class="cursor-pointer hover:bg-slate-200 p-2 rounded" v-on:click="afficher(item.nom_produit)">
                             <div>
                                 <img src="../images/tacos.jpg" alt="" class="w-16 h-16">
                                 <div class="m-2">
@@ -33,7 +33,7 @@
                 <div class="modal-footer">
                     <button type="button" class="bg-rose-500 p-2" data-bs-dismiss="modal">annuler
                         commmande</button>
-                    <button type="button" class="bg-green-500 p-2" @click="afficher">enregistrer comande</button>
+                    <button type="button" class="bg-green-500 p-2">enregistrer comande</button>
                 </div>
             </div>
         </div>
@@ -51,8 +51,8 @@ export default {
     },
 
     methods : {
-        afficher(){
-            console.log(this.produits)
+        afficher(nom){
+            console.log(nom)
         }
     },
     props : ['compter']
