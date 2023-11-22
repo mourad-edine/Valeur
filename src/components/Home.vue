@@ -4,28 +4,21 @@
             Le titre du resto
         </p>
     </div>
-    <div class="flex justify-evenly">
-        <ModelSup />
-        <div>
-            <p class="bg-orange-500 text-white p-2 rounded h-10 w-52 cursor-pointer mt-4" @click="naviguer">liste des
-                commandes
-            </p>
-        </div>
+    <div class="md:flex justify-evenly">
+        <Model />     
     </div>
 </template>
 
 <script>
-import ModelSup from './ModelSup.vue';
+import Model from './Model.vue';
 export default {
     name: "maison",
 
     components: {
-        ModelSup
+        Model
     },
     methods: {
-        naviguer() {
-            this.$router.push({ name: 'liste' });
-        }
+        
     }
 }
 </script>

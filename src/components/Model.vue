@@ -1,39 +1,36 @@
 <template>
-    <button type="button" class="bg-yellow-500 text-white p-2 m-4 rounded" data-bs-toggle="modal" data-bs-target="#exampleModal">
-        voir le menue
-    </button>
-    
     <!-- Modal -->
-    <div class="modal fade" id="exampleModal" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-lg modal-dialog-scrollable">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">listes des recettes</h5>
-                    
-                    <div class="flex">
-                        <img src="../images/panier.png" alt="" class="w-12 h-12">
-                        <h1 class=" text-rose-600 text-lg font-bold">{{ compter }}</h1>
-                    </div>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">X</button>
+    <div class="">
+        <div class="">
+            <div class="md:flex justify-between">
+                <div>
+                    <h1 class="mt-4  text-lg font-semibold opacity-60">listes de recettes</h1>
                 </div>
-                <div class="modal-body">
-                    <div class="grid grid-cols-2">
-                        <div v-for="item in produits" data-bs-toggle="modal" data-bs-target="#supplement"
-                            class="cursor-pointer hover:bg-slate-200 p-2 rounded" v-on:click="afficher(item.nom_produit)">
-                            <div>
-                                <img src="../images/tacos.jpg" alt="" class="w-16 h-16">
-                                <div class="m-2">
-                                    <span class="text-semibold m-2 text-gray-700">{{ item.nom_produit }}</span>
-                                    <span class="text-gray-400">prix :{{ item.prix }} $</span>
-                                </div>
-                            </div>
+                <div>
+                    <p class="bg-orange-500 text-white p-2 rounded h-10 w-52 cursor-pointer mt-4" @click="naviguer">liste
+                        des
+                        commandes
+                    </p>
+                </div>
+            </div>
+            <hr>
+
+            <div class="flex mt-3">
+                <img src="../images/panier.png" alt="" class="w-12 h-12">
+                <h1 class=" text-rose-600 text-lg font-bold">{{ compte }}</h1>
+            </div>
+        </div>
+        <div class="">
+            <div class="grid sm:grid-cols-2 lg:grid-cols-3 mt-2">
+                <div v-for="item in produits" class="cursor-pointer hover:bg-slate-200 p-2 rounded"
+                    v-on:click="informationId(item.id)">
+                    <div>
+                        <img src="../images/food.png" alt="" class="w-16 h-16">
+                        <div class="m-2">
+                            <span class="text-semibold m-2 text-gray-700">{{ item.nom_produit }}</span>
+                            <span class="text-gray-400">prix :{{ item.prix }} $</span>
                         </div>
                     </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="bg-rose-500 p-2" data-bs-dismiss="modal">annuler
-                        commmande</button>
-                    <button type="button" class="bg-green-500 p-2">enregistrer comande</button>
                 </div>
             </div>
         </div>
@@ -46,15 +43,24 @@ export default {
     name: 'Model',
     data() {
         return {
-            produits: pro
+            produits: pro,
+            compte: 0
         }
     },
 
-    methods : {
-        afficher(nom){
+    methods: {
+        afficher(nom) {
+            this.compte++
             console.log(nom)
+        },
+        naviguer() {
+            this.$router.push({ name: 'liste' });
+        },
+
+        informationId(id) {
+            this.$router.push({ name: 'info', params: { id } });
         }
     },
-    props : ['compter']
+    props: ['compter']
 }
 </script>
