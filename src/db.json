@@ -2,30 +2,30 @@
   {
     "id": 1,
     "nom_produit": "Tomato Puree",
-    "prix": "$393.09",
+    "prix": 393.09,
     "image": "arranger.jpg"
   },
   {
     "id": 2,
     "nom_produit": "Onions - White",
-    "prix": "$286.20",
+    "prix": 286.20,
     "image": "burger.jpg"
   },
   {
     "id": 3,
     "nom_produit": "Potatoes - Parissienne",
-    "prix": "$570.77",
+    "prix": 570.77,
     "image": "crème.jpg"
   },
   {
     "id": 4,
     "nom_produit": "Tabasco Sauce, 2 Oz",
-    "prix": "$79.94",
+    "prix": 79.94,
     "image": "croissant.jpg"
   },
   {
     "id": 5,
     "nom_produit": "Doilies - 5, Paper",
-    "prix" : "200 $"
+    "prix" : 200
   }
 ]

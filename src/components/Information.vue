@@ -7,22 +7,32 @@
   <div>
     <div class="md:flex justify-evenly">
 
-      <p class="text-lg font-light m-3">
-        Details du plats
+      <p class="text-lg font-light mt-3 ml-5">
+        Déscription du plats
       </p>
+      <hr class="m-2">
+      <div>
+        <p class="bg-orange-500 text-white p-2 rounded h-10 w-52 cursor-pointer mt-4" @click="naviguer">
+          retour au listes
+        </p>
+      </div>
     </div>
 
     <div class="bg-gray-50 rounded p-3">
+      <div class="flex ml-80 mb-3 mt-1 mr-2">
+        <img src="../images/panier.png" alt="" class="w-10 h-10">
+        <h1 class=" text-rose-600 text-lg font-bold">{{ command }}</h1>
 
+      </div>
       <div class="md:flex justify-evenly">
-        <div class="md:flex bg-gray-100 rounded ml-4">
+        <div class="md:flex bg-gray-100 rounded mr-4">
           <img src="../images/food.png" alt="" width="180" height="200" class="rounded overflow-hidden">
           <div>
-            <p class="text-semibold text-lg opacity-80 m-5">nom du plats : <span class="font-semibold">{{
+            <p class="text-semibold text-lg opacity-80 m-3">nom du plats : <span class="font-semibold">{{
               selectionner.nom_produit
             }}</span></p>
-            <p class="text-semibold text-lg opacity-80 m-5">prix : <span class="font-semibold">{{ selectionner.prix
-            }}</span></p>
+            <p class="text-semibold text-lg opacity-80 m-3">prix : <span class="font-semibold">{{ selectionner.prix
+            }} $ </span></p>
           </div>
         </div>
 
@@ -30,18 +40,11 @@
           <h1 class="text-lg">supplements</h1>
           <hr class="mt-2 mb-3">
           <div class="form-check">
-            <input class="form-check-input" type="checkbox" value="" id="pain">
+            <input class="form-check-input" type="checkbox" id="pain">
             <label class="form-check-label" for="pain">
               pain
             </label>
           </div>
-          <div class="form-check">
-            <input class="form-check-input" type="checkbox" value="" id="paella">
-            <label class="form-check-label" for="paella">
-              paella
-            </label>
-          </div>
-
           <div class="form-check">
             <input class="form-check-input" type="checkbox" value="" id="ketchup">
             <label class="form-check-label" for="ketchup">
@@ -65,13 +68,15 @@
       </div>
       <div class="flex justify-evenly mt-4">
         <div class="flex pb-16 pt-3 mr-6">
-          <input type="number" class="p-2 rounded form-control m-1 border-2 border-gray-950" placeholder="1" min="1"
+          <input type="text" class="p-2 rounded form-control m-1 border-2 border-gray-950 w-12" placeholder="1" min="1"
             max="40" v-model="nombre">
           <img src="../images/plus.png" alt="" width="40" height="40" class="m-1 cursor-pointer" @click="augmenter">
           <img src="../images/moins.png" alt="" width="40" height="40" class="m-1 cursor-pointer" @click="abaisser">
         </div>
+
         <div class="">
-          <label class="p-2 bg-orange-500 text-white rounded">{{ selectionner.prix }} $</label>
+          <label class="p-2 bg-orange-500 text-white rounded"> total : {{ (selectionner.prix * nombre).toFixed(2) }}
+            $</label>
           <button type="button" class="m-4 p-2 bg-orange-500 text-white rounded w-60 " @click="calculer">ajouter au
             panier
           </button>
@@ -102,7 +107,8 @@ export default defineComponent({
   data() {
     return {
       nombre: 1,
-      price: 0
+      price: 0,
+      command: 0
     }
   },
   methods: {
@@ -122,7 +128,10 @@ export default defineComponent({
     },
 
     calculer() {
-      this.price = this.nombre * selectionner.prix
+      this.command++
+    },
+    naviguer(){
+      this.$router.push({ name: 'home' });
     }
   }
 })
