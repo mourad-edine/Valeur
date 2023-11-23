@@ -19,9 +19,9 @@
     </div>
 
     <div class="bg-gray-50 rounded p-3">
-      <div class="flex justify-around">
+      <div class="flex sm:justify-around justify-start">
         <div class="flex">
-          <img src="../images/panier.png" alt="" class="w-10 h-10">
+          <img src="../images/panier.png" alt="" class="sm:w-10 sm:h-10 h-10 w-full">
           <h1 class=" text-rose-600 text-lg font-bold">{{ command }}</h1>
         </div>
         <div>
@@ -76,7 +76,7 @@
 
       </div>
       <div class="md:flex justify-center mt-4">
-        <div class="flex pb-2 md:pb-16 pt-3 mr-6">
+        <div class="flex pb-2 md:pb-18 mr-6 lg:pb-18 xl:pb-18">
           <input type="text" class="p-2 rounded form-control m-1 border-2 border-gray-950 w-12" placeholder="1" min="1"
             max="40" v-model="nombre">
           <img src="../images/plus.png" alt="" width="40" height="40" class="m-1 cursor-pointer" @click="augmenter">
@@ -84,10 +84,10 @@
         </div>
 
         <div class="">
-          <label class="p-2 bg-orange-500 text-white rounded m-1"> total : {{ ((selectionner.prix + somme + sum) *
+          <label class="p-2 bg-orange-500 text-white rounded m-1 sm:m-3"> total : {{ ((selectionner.prix + somme + sum) *
             nombre).toFixed(2) }}
             $</label>
-          <button type="button" class="md:m-4 p-2 bg-orange-500 text-white rounded w-60 m-1" @click="calculer">ajouter au
+          <button type="button" class="md:m-4 p-2 bg-orange-500 text-white rounded w-60 m-1 sm:m-3" @click="calculer">ajouter au
             panier
           </button>
         </div>
