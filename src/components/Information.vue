@@ -12,7 +12,7 @@
       </p>
       <hr class="m-2">
       <div>
-        <p class="bg-orange-500 text-white p-2 rounded h-10 w-52 cursor-pointer mt-4" @click="naviguer">
+        <p class="bg-orange-500 text-white p-2 rounded h-10 md:w-52 w-full cursor-pointer mt-4" @click="naviguer">
           retour au listes
         </p>
       </div>
@@ -30,17 +30,19 @@
       </div>
       <div class="md:flex justify-center">
         <div class="md:flex bg-gray-100 rounded mr-4">
-          <img src="../images/food.png" alt="" width="200" class="rounded overflow-hidden pt-7 pb-12">
+          <img src="../images/food.png" alt="" width="200" class="rounded overflow-hidden pt-2 pb-12">
           <div class="m-2">
-            <p class="text-semibold text-lg opacity-80 m-3 mt">nom du plats : <span class="font-semibold">{{
+            <p class="text-semibold text-lg opacity-80 m-1 mt">nom du plats : <span class="font-semibold">{{
               selectionner.nom_produit
             }}</span></p>
-            <p class="text-semibold text-lg opacity-80 m-3">prix : <span class="font-semibold">{{ selectionner.prix
+            <p class="text-semibold text-lg opacity-80 m-1">prix : <span class="font-semibold">{{ selectionner.prix
             }} $ </span></p>
-            <p class="text-semibold text-lg opacity-80 m-3 w-60">description : <span class="font-thin text-md"> soluta
+            <p class="text-semibold text-lg opacity-80 m-1 w-60">description : <span class="font-thin text-md"> soluta
                 sapiente odit, necessitatibus maxime sed aspernatur est cupiditate tenetur praesentium doloribus ipsa
                 iste</span></p>
           </div>
+
+          <!--------->
         </div>
 
         <div class="m-1 mr-3">
@@ -51,7 +53,7 @@
             <input class="form-check-input" type="checkbox" :value="val.prix" :id="index" v-model="comp">
 
             <label class="form-check-label" :for="index">
-              {{ val.sauce_name }}
+              {{ val.sauce_name }} - {{ val.prix }} $
             </label>
           </div>
           <div class="m-1 mr-3">
@@ -62,24 +64,19 @@
               <input class="form-check-input" type="checkbox" :value="dess.prix" :id="'check-' + i" v-model="desserty">
 
               <label class="form-check-label" :for="'check-' + i">
-                {{ dess.dessert_name }}
+                {{ dess.dessert_name }} - {{ dess.prix }}$
               </label>
             </div>
           </div>
           <hr class="mt-2 mb-2">
           <div>
-            <h1 class="font-bold">{{ somme + sum }} $</h1>
+            <!----<h1 class="font-bold">{{ somme + sum }} $</h1>--->
           </div>
         </div>
 
-
-
-
-
-
       </div>
-      <div class="flex justify-center mt-4">
-        <div class="flex pb-16 pt-3 mr-6">
+      <div class="md:flex justify-center mt-4">
+        <div class="flex pb-2 md:pb-16 pt-3 mr-6">
           <input type="text" class="p-2 rounded form-control m-1 border-2 border-gray-950 w-12" placeholder="1" min="1"
             max="40" v-model="nombre">
           <img src="../images/plus.png" alt="" width="40" height="40" class="m-1 cursor-pointer" @click="augmenter">
@@ -87,10 +84,10 @@
         </div>
 
         <div class="">
-          <label class="p-2 bg-orange-500 text-white rounded"> total : {{ ((selectionner.prix + somme + sum) *
+          <label class="p-2 bg-orange-500 text-white rounded m-1"> total : {{ ((selectionner.prix + somme + sum) *
             nombre).toFixed(2) }}
             $</label>
-          <button type="button" class="m-4 p-2 bg-orange-500 text-white rounded w-60 " @click="calculer">ajouter au
+          <button type="button" class="md:m-4 p-2 bg-orange-500 text-white rounded w-60 m-1" @click="calculer">ajouter au
             panier
           </button>
         </div>
