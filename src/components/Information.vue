@@ -7,7 +7,7 @@
   <div>
     <div class="md:flex justify-evenly">
 
-      <p class="text-lg font-light mt-3 ml-5 cursor-pointer bg-slate-400" @click="addition">
+      <p class="text-lg font-light mt-3 ml-5 cursor-pointer ">
         Déscription du plats
       </p>
       <hr class="m-2">
@@ -39,36 +39,22 @@
         <div class="m-1 mr-3">
           <h1 class="text-lg">supplements</h1>
           <hr class="mt-2 mb-3">
-          <div class="form-check">
-            <input class="form-check-input" type="checkbox" id="pain" value="15" v-model="comp">
-            <label class="form-check-label" for="pain">
-              pain
-            </label>
-          </div>
-          <div class="form-check">
-            <input class="form-check-input" type="checkbox" value="13" id="ketchup" v-model="comp">
-            <label class="form-check-label" for="ketchup">
-              ketchup
-            </label>
-          </div>
-          <div class="form-check">
-            <input class="form-check-input" type="checkbox" value="5" id="moutarde" v-model="comp">
-            <label class="form-check-label" for="moutarde">
-              moutarde
-            </label>
-          </div>
-          <div class="form-check">
-            <input class="form-check-input" type="checkbox" value="7" id="mayonaise" v-model="comp">
+
+          <div class="form-check" v-for="(val,index) in sauces">
+            <input class="form-check-input" type="checkbox" :value="val.prix" :id="index" v-model="comp">
             
-            <label class="form-check-label" for="mayonaise">
-              mayonaise
+            <label class="form-check-label" :for="index">
+              {{ val.sauce_name }}
             </label>
-            <hr class="mt-2 mb-2">
+          </div>
+
+          <hr class="mt-2 mb-2">
             <div>
               <h1>{{ somme }} $</h1>
             </div>
-          </div>
         </div>
+
+
 
       </div>
       <div class="flex justify-evenly mt-4">
@@ -105,7 +91,7 @@ const selectionner = computed(() => {
 </script>
 
 <script>
-
+import sauce from '../sauce.json'
 import { defineComponent } from 'vue';
 export default defineComponent({
   name: 'information',
@@ -119,7 +105,8 @@ export default defineComponent({
       price: 0,
       command: 0,
       comp : [],
-      somme : 0
+      somme : 0,
+      sauces : sauce,
     }
   },
   methods: {
@@ -144,7 +131,10 @@ export default defineComponent({
     naviguer(){
       this.$router.push({ name: 'home' });
     },
-    addition(){
+   
+  },
+  watch:{
+    comp : function(){
       var tab = []
       tab = this.comp.map((str) => parseInt(str))
       this.somme = tab.reduce((accumuler,valeuractu) => accumuler + valeuractu, 0)

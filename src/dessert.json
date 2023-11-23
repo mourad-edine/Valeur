@@ -1,0 +1,28 @@
+[
+    {
+        "id": 1,
+        "first_name": "Bread Country Roll",
+        "prix": 809.46
+    },
+    {
+        "id": 2,
+        "first_name": "Veal - Ground",
+        "prix": 43.49
+    },
+    {
+        "id": 3,
+        "first_name": "Cake Circle, Paprus",
+        "prix": 2.05
+    },
+    {
+        "id": 4,
+        "first_name": "Flour - Fast / Rapid",
+        "prix": 882.08
+    },
+    {
+        "id": 5,
+        "first_name": "Cheese - Gouda Smoked",
+        "prix": 11.01
+    }
+
+]
