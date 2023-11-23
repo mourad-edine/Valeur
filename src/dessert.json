@@ -1,28 +1,27 @@
 [
     {
         "id": 1,
-        "first_name": "Bread Country Roll",
-        "prix": 809.46
+        "dessert_name": "Tiramisu express",
+        "prix": 9.46
     },
     {
         "id": 2,
-        "first_name": "Veal - Ground",
-        "prix": 43.49
+        "dessert_name": "glace à la vanille",
+        "prix": 4.49
     },
     {
         "id": 3,
-        "first_name": "Cake Circle, Paprus",
+        "dessert_name": "Brownies express",
         "prix": 2.05
     },
     {
         "id": 4,
-        "first_name": "Flour - Fast / Rapid",
-        "prix": 882.08
+        "dessert_name": "Gâteau à l'ananas mixé rapide",
+        "prix": 8.08
     },
     {
         "id": 5,
-        "first_name": "Cheese - Gouda Smoked",
+        "dessert_name": "Financier rapide",
         "prix": 11.01
     }
-
 ]

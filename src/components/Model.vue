@@ -16,8 +16,6 @@
             <hr>
 
             <div class="flex mt-3">
-                <img src="../images/panier.png" alt="" class="w-10 h-10">
-                <h1 class=" text-rose-600 text-lg font-bold">{{ command }}</h1>
             </div>
         </div>
         <div class="">

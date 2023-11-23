@@ -19,20 +19,27 @@
     </div>
 
     <div class="bg-gray-50 rounded p-3">
-      <div class="flex ml-80 mb-3 mt-1 mr-2">
-        <img src="../images/panier.png" alt="" class="w-10 h-10">
-        <h1 class=" text-rose-600 text-lg font-bold">{{ command }}</h1>
+      <div class="flex justify-around">
+        <div class="flex">
+          <img src="../images/panier.png" alt="" class="w-10 h-10">
+          <h1 class=" text-rose-600 text-lg font-bold">{{ command }}</h1>
+        </div>
+        <div>
 
+        </div>
       </div>
-      <div class="md:flex justify-evenly">
+      <div class="md:flex justify-center">
         <div class="md:flex bg-gray-100 rounded mr-4">
-          <img src="../images/food.png" alt="" width="180" height="200" class="rounded overflow-hidden">
+          <img src="../images/food.png" alt="" width="200" class="rounded overflow-hidden">
           <div>
             <p class="text-semibold text-lg opacity-80 m-3">nom du plats : <span class="font-semibold">{{
               selectionner.nom_produit
             }}</span></p>
             <p class="text-semibold text-lg opacity-80 m-3">prix : <span class="font-semibold">{{ selectionner.prix
             }} $ </span></p>
+            <p class="text-semibold text-lg opacity-80 m-3 w-60">description : <span class="font-thin text-sm"> soluta
+                sapiente odit, necessitatibus maxime sed aspernatur est cupiditate tenetur praesentium doloribus ipsa
+                iste</span></p>
           </div>
         </div>
 
@@ -40,24 +47,38 @@
           <h1 class="text-lg">supplements</h1>
           <hr class="mt-2 mb-3">
 
-          <div class="form-check" v-for="(val,index) in sauces">
+          <div class="form-check" v-for="(val, index) in sauces" :key="index">
             <input class="form-check-input" type="checkbox" :value="val.prix" :id="index" v-model="comp">
-            
+
             <label class="form-check-label" :for="index">
               {{ val.sauce_name }}
             </label>
           </div>
+          <div class="m-1 mr-3">
+            <h1 class="text-lg">dessert</h1>
+            <hr class="mt-2 mb-3">
 
-          <hr class="mt-2 mb-2">
-            <div>
-              <h1>{{ somme }} $</h1>
+            <div class="form-check" v-for="(dess, i) in desserts" :key="i">
+              <input class="form-check-input" type="checkbox" :value="dess.prix" :id="'check-' + i" v-model="desserty">
+
+              <label class="form-check-label" :for="'check-' + i">
+                {{ dess.dessert_name }}
+              </label>
             </div>
+          </div>
+          <hr class="mt-2 mb-2">
+          <div>
+            <h1 class="font-bold">{{ somme + sum }} $</h1>
+          </div>
         </div>
 
 
 
+
+
+
       </div>
-      <div class="flex justify-evenly mt-4">
+      <div class="flex justify-center mt-4">
         <div class="flex pb-16 pt-3 mr-6">
           <input type="text" class="p-2 rounded form-control m-1 border-2 border-gray-950 w-12" placeholder="1" min="1"
             max="40" v-model="nombre">
@@ -66,7 +87,8 @@
         </div>
 
         <div class="">
-          <label class="p-2 bg-orange-500 text-white rounded"> total : {{ ((selectionner.prix + somme) * nombre).toFixed(2) }}
+          <label class="p-2 bg-orange-500 text-white rounded"> total : {{ ((selectionner.prix + somme + sum) *
+            nombre).toFixed(2) }}
             $</label>
           <button type="button" class="m-4 p-2 bg-orange-500 text-white rounded w-60 " @click="calculer">ajouter au
             panier
@@ -91,22 +113,26 @@ const selectionner = computed(() => {
 </script>
 
 <script>
+import dessert from '../dessert.json'
 import sauce from '../sauce.json'
 import { defineComponent } from 'vue';
 export default defineComponent({
   name: 'information',
-  
-  created(){
-    
+
+  created() {
+
   },
   data() {
     return {
       nombre: 1,
       price: 0,
       command: 0,
-      comp : [],
-      somme : 0,
-      sauces : sauce,
+      comp: [],
+      somme: 0,
+      sauces: sauce,
+      desserts: dessert,
+      desserty: [],
+      sum: 0
     }
   },
   methods: {
@@ -128,16 +154,21 @@ export default defineComponent({
     calculer() {
       this.command++
     },
-    naviguer(){
+    naviguer() {
       this.$router.push({ name: 'home' });
     },
-   
+
   },
-  watch:{
-    comp : function(){
+  watch: {
+    comp: function () {
       var tab = []
       tab = this.comp.map((str) => parseInt(str))
-      this.somme = tab.reduce((accumuler,valeuractu) => accumuler + valeuractu, 0)
+      this.somme = tab.reduce((accumuler, valeuractu) => accumuler + valeuractu, 0)
+    },
+    desserty: function () {
+      var tableau = []
+      tableau = this.desserty.map((str) => parseInt(str))
+      this.sum = tableau.reduce((accumuler, valeuractu) => accumuler + valeuractu, 0)
     }
   }
 })
