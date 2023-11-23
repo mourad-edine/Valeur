@@ -7,7 +7,7 @@
   <div>
     <div class="md:flex justify-evenly">
 
-      <p class="text-lg font-light mt-3 ml-5">
+      <p class="text-lg font-light mt-3 ml-5 cursor-pointer bg-slate-400" @click="addition">
         Déscription du plats
       </p>
       <hr class="m-2">
@@ -40,28 +40,33 @@
           <h1 class="text-lg">supplements</h1>
           <hr class="mt-2 mb-3">
           <div class="form-check">
-            <input class="form-check-input" type="checkbox" id="pain">
+            <input class="form-check-input" type="checkbox" id="pain" value="15" v-model="comp">
             <label class="form-check-label" for="pain">
               pain
             </label>
           </div>
           <div class="form-check">
-            <input class="form-check-input" type="checkbox" value="" id="ketchup">
+            <input class="form-check-input" type="checkbox" value="13" id="ketchup" v-model="comp">
             <label class="form-check-label" for="ketchup">
               ketchup
             </label>
           </div>
           <div class="form-check">
-            <input class="form-check-input" type="checkbox" value="" id="moutarde">
+            <input class="form-check-input" type="checkbox" value="5" id="moutarde" v-model="comp">
             <label class="form-check-label" for="moutarde">
               moutarde
             </label>
           </div>
           <div class="form-check">
-            <input class="form-check-input" type="checkbox" value="" id="mayonaise">
+            <input class="form-check-input" type="checkbox" value="7" id="mayonaise" v-model="comp">
+            
             <label class="form-check-label" for="mayonaise">
               mayonaise
             </label>
+            <hr class="mt-2 mb-2">
+            <div>
+              <h1>{{ somme }} $</h1>
+            </div>
           </div>
         </div>
 
@@ -75,7 +80,7 @@
         </div>
 
         <div class="">
-          <label class="p-2 bg-orange-500 text-white rounded"> total : {{ (selectionner.prix * nombre).toFixed(2) }}
+          <label class="p-2 bg-orange-500 text-white rounded"> total : {{ ((selectionner.prix + somme) * nombre).toFixed(2) }}
             $</label>
           <button type="button" class="m-4 p-2 bg-orange-500 text-white rounded w-60 " @click="calculer">ajouter au
             panier
@@ -100,15 +105,21 @@ const selectionner = computed(() => {
 </script>
 
 <script>
+
 import { defineComponent } from 'vue';
 export default defineComponent({
   name: 'information',
-
+  
+  created(){
+    
+  },
   data() {
     return {
       nombre: 1,
       price: 0,
-      command: 0
+      command: 0,
+      comp : [],
+      somme : 0
     }
   },
   methods: {
@@ -132,6 +143,11 @@ export default defineComponent({
     },
     naviguer(){
       this.$router.push({ name: 'home' });
+    },
+    addition(){
+      var tab = []
+      tab = this.comp.map((str) => parseInt(str))
+      this.somme = tab.reduce((accumuler,valeuractu) => accumuler + valeuractu, 0)
     }
   }
 })
