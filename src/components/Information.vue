@@ -30,14 +30,14 @@
       </div>
       <div class="md:flex justify-center">
         <div class="md:flex bg-gray-100 rounded mr-4">
-          <img src="../images/food.png" alt="" width="200" class="rounded overflow-hidden">
-          <div>
-            <p class="text-semibold text-lg opacity-80 m-3">nom du plats : <span class="font-semibold">{{
+          <img src="../images/food.png" alt="" width="200" class="rounded overflow-hidden pt-7 pb-12">
+          <div class="m-2">
+            <p class="text-semibold text-lg opacity-80 m-3 mt">nom du plats : <span class="font-semibold">{{
               selectionner.nom_produit
             }}</span></p>
             <p class="text-semibold text-lg opacity-80 m-3">prix : <span class="font-semibold">{{ selectionner.prix
             }} $ </span></p>
-            <p class="text-semibold text-lg opacity-80 m-3 w-60">description : <span class="font-thin text-sm"> soluta
+            <p class="text-semibold text-lg opacity-80 m-3 w-60">description : <span class="font-thin text-md"> soluta
                 sapiente odit, necessitatibus maxime sed aspernatur est cupiditate tenetur praesentium doloribus ipsa
                 iste</span></p>
           </div>
@@ -100,6 +100,10 @@
 </template>
 
 <script setup>
+
+window.onload = function () {
+  window.scrollTo(0, document.body.scrollHeight);
+};
 import pro from '../db.json'
 import { computed } from 'vue'
 import { useRoute } from 'vue-router'
@@ -158,6 +162,12 @@ export default defineComponent({
       this.$router.push({ name: 'home' });
     },
 
+  },
+
+  mounted() {
+    this.$nextTick(() => {
+      window.scrollTo(0, document.body.scrollHeight);
+    });
   },
   watch: {
     comp: function () {
