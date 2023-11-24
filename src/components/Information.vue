@@ -1,8 +1,12 @@
 <template>
-  <div class="bg-orange-500 p-3">
-    <p class="text-lg m-7 text-white font-bold">
+  <div class="bg-orange-500 p-3 flex justify-between">
+    <p class="text-lg m-7 text-white font-bold ml-13">
       customiser votre plat
     </p>
+    <div class="flex mt-4 mr-2  justify-end">
+      <img src="../images/panier.png" alt="" class="sm:w-10 sm:h-10 h-10 w-full">
+      <h1 class=" text-rose-600 text-lg font-bold">{{ local }}</h1>
+    </div>
   </div>
   <div>
     <div class="md:flex justify-evenly">
@@ -19,19 +23,12 @@
     </div>
 
     <div class="bg-gray-50 rounded p-3">
-      <div class="flex sm:justify-around justify-start">
-        <div class="flex">
-          <img src="../images/panier.png" alt="" class="sm:w-10 sm:h-10 h-10 w-full">
-          <h1 class=" text-rose-600 text-lg font-bold">{{ command }}</h1>
-        </div>
-        <div>
-
-        </div>
+      <div class="flex sm:justify-evenly justify-start">
+        <!------>
       </div>
       <div class="md:flex justify-center">
         <div class="md:flex bg-gray-100 rounded mr-4">
-          <img src="../images/food.png" alt="" width="200" class="rounded overflow-hidden pt-2 pb-12">
-          <div class="m-2">
+          <div class="m-2 mt-0">
             <p class="text-semibold text-lg opacity-80 m-1 mt">nom du plats : <span class="font-semibold">{{
               selectionner.nom_produit
             }}</span></p>
@@ -87,12 +84,15 @@
           <label class="p-2 bg-orange-500 text-white rounded m-1 sm:m-3"> total : {{ ((selectionner.prix + somme + sum) *
             nombre).toFixed(2) }}
             $</label>
-          <button type="button" class="md:m-4 p-2 bg-orange-500 text-white rounded w-60 m-1 sm:m-3" @click="calculer">ajouter au
+          <button type="button" class="md:m-4 p-2 bg-orange-500 text-white rounded w-60 m-1 sm:m-3"
+            @click="calculer">ajouter au
             panier
           </button>
         </div>
       </div>
     </div>
+
+    <Tooter />
   </div>
 </template>
 
@@ -114,14 +114,16 @@ const selectionner = computed(() => {
 </script>
 
 <script>
+import Tooter from './footer.vue';
+import Swal from 'sweetalert2';
 import dessert from '../dessert.json'
 import sauce from '../sauce.json'
 import { defineComponent } from 'vue';
 export default defineComponent({
   name: 'information',
 
-  created() {
-
+  components: {
+    Tooter
   },
   data() {
     return {
@@ -133,7 +135,8 @@ export default defineComponent({
       sauces: sauce,
       desserts: dessert,
       desserty: [],
-      sum: 0
+      sum: 0,
+      local: 0
     }
   },
   methods: {
@@ -151,10 +154,21 @@ export default defineComponent({
         this.nombre--
       }
     },
-
     calculer() {
+      Swal.fire({
+        position: 'top-end',
+        icon: 'success',
+        title: 'commande ajoouté',
+        showConfirmButton: false,
+        timer: 500
+      })
       this.command++
+      localStorage.setItem('commande', this.command)
+      this.local = localStorage.getItem('commande')
+
+
     },
+
     naviguer() {
       this.$router.push({ name: 'home' });
     },
