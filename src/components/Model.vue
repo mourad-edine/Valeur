@@ -61,7 +61,6 @@ export default {
            await axios.get('http://127.0.0.1:8000/api/choses')
                 .then((response) => {
                     this.produits = response.data.produit;
-                    console.log(this.produits)
                 })
                 .catch(error => {
                     console.error('Erreur lors de la récupération des données:', error);

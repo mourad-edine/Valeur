@@ -5,7 +5,7 @@
     </p>
     <div class="flex mt-4 mr-2  justify-end">
       <img src="../images/panier.png" alt="" class="sm:w-10 sm:h-10 h-10 w-full">
-      <h1 class=" text-rose-600 text-lg font-bold">{{ local }}</h1>
+      <h1 class=" text-rose-600 text-lg font-bold">{{  }}</h1>
     </div>
   </div>
   <div>
@@ -82,7 +82,7 @@
             nombre).toFixed(2) }}
             $</label>
           <button type="button" class="md:m-4 p-2 bg-orange-500 text-white rounded w-60 m-1 sm:m-3"
-            @click="calculer">ajouter au
+            @click="Panier">ajouter au
             panier
           </button>
         </div>
@@ -111,14 +111,12 @@ export default defineComponent({
     return {
       nombre: 1,
       price: 0,
-      command: 0,
       comp: [],
       somme: 0,
       sauces: sauce,
       desserts: dessert,
       desserty: [],
       sum: 0,
-      local: 0,
       informe : {
         
       }
@@ -139,7 +137,17 @@ export default defineComponent({
         this.nombre--
       }
     },
-    calculer() {
+
+    async Obtenir(id){
+      let url = `http://127.0.0.1:8000/api/produits/${id}`
+        await axios.get(url)
+        .then(reponse =>{
+          //console.log(reponse.data.produit)
+          this.informe = reponse.data.produit
+        })
+    },
+
+    Panier(){
       Swal.fire({
         position: 'top-end',
         icon: 'success',
@@ -147,19 +155,14 @@ export default defineComponent({
         showConfirmButton: false,
         timer: 500
       })
-      this.command++
+      const form = new FormData()
+      form.append('designation', this.informe.nom)
+      form.append('nombre',this.nombre)
+      form.append('prix_unitaire',this.informe.prix)
+      form.append('total',((parseFloat(this.informe.prix) + this.somme + this.sum) * this.nombre).toFixed(2))
+      console.log(form)
+      this.$router.push({ name: 'home' });
 
-
-
-    },
-
-    async Obtenir(id){
-      let url = `http://127.0.0.1:8000/api/produits/${id}`
-        await axios.get(url)
-        .then(reponse =>{
-          console.log(reponse.data.produit)
-          this.informe = reponse.data.produit
-        })
     },
 
     naviguer() {
