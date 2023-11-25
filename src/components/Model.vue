@@ -25,7 +25,7 @@
                     <div>
                         <img src="../images/food.png" alt="" class="w-16 h-16">
                         <div class="m-2">
-                            <span class="text-semibold m-2 text-gray-700">{{ item.nom_produit }}</span>
+                            <span class="text-semibold m-2 text-gray-700">{{ item.nom }}</span>
                             <span class="text-gray-400">prix :{{ item.prix }} $</span>
                         </div>
                     </div>
@@ -36,13 +36,12 @@
 </template>
 
 <script>
-import pro from '../db.json'
+import axios from 'axios'
 export default {
     name: 'Model',
     data() {
         return {
-            produits: pro,
-            compte: 0
+            produits: [],
         }
     },
 
@@ -57,7 +56,21 @@ export default {
 
         informationId(id) {
             this.$router.push({ name: 'info', params: { id } });
+        },
+        async Prod() {
+           await axios.get('http://127.0.0.1:8000/api/choses')
+                .then((response) => {
+                    this.produits = response.data.produit;
+                    console.log(this.produits)
+                })
+                .catch(error => {
+                    console.error('Erreur lors de la récupération des données:', error);
+                });
         }
+
+    },
+    mounted() {
+        this.Prod();
     },
     props: ['command']
 }

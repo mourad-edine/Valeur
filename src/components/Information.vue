@@ -29,14 +29,11 @@
       <div class="md:flex justify-center">
         <div class="md:flex bg-gray-100 rounded mr-4">
           <div class="m-2 mt-0">
-            <p class="text-semibold text-lg opacity-80 m-1 mt">nom du plats : <span class="font-semibold">{{
-              selectionner.nom_produit
-            }}</span></p>
-            <p class="text-semibold text-lg opacity-80 m-1">prix : <span class="font-semibold">{{ selectionner.prix
-            }} $ </span></p>
-            <p class="text-semibold text-lg opacity-80 m-1 w-60">description : <span class="font-thin text-md"> soluta
-                sapiente odit, necessitatibus maxime sed aspernatur est cupiditate tenetur praesentium doloribus ipsa
-                iste</span></p>
+            <p class="font-semibold text-lg opacity-80 m-1 mt">nom du plats : <span class="font-light">
+              {{ informe.nom }}</span></p>
+            <p class="font-semibold text-lg opacity-80 m-1">prix : <span class="font-light">
+              {{ informe.prix }} $ </span></p>
+            <p class="font-semibold text-lg opacity-80 m-1 w-60">description : <span class="font-thin text-md"> {{informe.description}}</span></p>
           </div>
 
           <!--------->
@@ -81,7 +78,7 @@
         </div>
 
         <div class="">
-          <label class="p-2 bg-orange-500 text-white rounded m-1 sm:m-3"> total : {{ ((selectionner.prix + somme + sum) *
+          <label class="p-2 bg-orange-500 text-white rounded m-1 sm:m-3"> total : {{ ((parseFloat(informe.prix) + somme + sum) *
             nombre).toFixed(2) }}
             $</label>
           <button type="button" class="md:m-4 p-2 bg-orange-500 text-white rounded w-60 m-1 sm:m-3"
@@ -96,24 +93,9 @@
   </div>
 </template>
 
-<script setup>
-
-window.onload = function () {
-  window.scrollTo(0, document.body.scrollHeight);
-};
-import pro from '../db.json'
-import { computed } from 'vue'
-import { useRoute } from 'vue-router'
-const route = useRoute()
-const selectionner = computed(() => {
-  return pro.find((item) => item.id === Number(route.params.id))
-})
-
-
-
-</script>
 
 <script>
+import axios from 'axios'
 import Tooter from './footer.vue';
 import Swal from 'sweetalert2';
 import dessert from '../dessert.json'
@@ -136,7 +118,10 @@ export default defineComponent({
       desserts: dessert,
       desserty: [],
       sum: 0,
-      local: 0
+      local: 0,
+      informe : {
+        
+      }
     }
   },
   methods: {
@@ -163,10 +148,18 @@ export default defineComponent({
         timer: 500
       })
       this.command++
-      localStorage.setItem('commande', this.command)
-      this.local = localStorage.getItem('commande')
 
 
+
+    },
+
+    async Obtenir(id){
+      let url = `http://127.0.0.1:8000/api/produits/${id}`
+        await axios.get(url)
+        .then(reponse =>{
+          console.log(reponse.data.produit)
+          this.informe = reponse.data.produit
+        })
     },
 
     naviguer() {
@@ -179,6 +172,7 @@ export default defineComponent({
     this.$nextTick(() => {
       window.scrollTo(0, document.body.scrollHeight);
     });
+    this.Obtenir(this.$route.params.id)
   },
   watch: {
     comp: function () {

@@ -4,14 +4,13 @@ export default {
 
     data() {
         return {
-            dataLoaded: false,
             users: []
         };
     },
     methods: {
        async fetchData() {
            await axios.get('http://127.0.0.1:8000/api/hote')
-                .then(response => {
+                .then((response) => {
                     this.users = response.data.utilisateur;
                 })
                 .catch(error => {
