@@ -147,7 +147,7 @@ export default defineComponent({
         })
     },
 
-    Panier(){
+    async Panier(){
       Swal.fire({
         position: 'top-end',
         icon: 'success',
@@ -160,7 +160,11 @@ export default defineComponent({
       form.append('nombre',this.nombre)
       form.append('prix_unitaire',this.informe.prix)
       form.append('total',((parseFloat(this.informe.prix) + this.somme + this.sum) * this.nombre).toFixed(2))
-      console.log(form)
+
+      await axios.post('http://127.0.0.1:8000/api/enregistrement', form)
+      .then(reponse => {
+        console.log(reponse)
+      })
       this.$router.push({ name: 'home' });
 
     },

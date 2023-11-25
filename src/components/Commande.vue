@@ -8,15 +8,19 @@ export default {
         };
     },
     methods: {
-       async fetchData() {
-           await axios.get('http://127.0.0.1:8000/api/hote')
+        async fetchData() {
+            await axios.get('http://127.0.0.1:8000/api/hote')
                 .then((response) => {
                     this.users = response.data.utilisateur;
                 })
                 .catch(error => {
                     console.error('Erreur lors de la récupération des données:', error);
                 });
-        }
+        },
+
+        naviguer() {
+            this.$router.push({ name: 'home' });
+        },
     },
     mounted() {
         this.fetchData();
@@ -31,24 +35,29 @@ export default {
             listes des commandes
         </p>
     </div>
-    <div class="m-20">
+    <div>
+        <p class="p-2 bg-orange-500 sm:ml-20 text-white rounded cursor-pointer mt-3 sm:w-20 mb-2" @click="naviguer">
+            retour au liste
+        </p>
+    </div>
+    <div class="sm:m-20 sm:bg-gray-100">
+        <p class="bg-orange-500 p-3 rounded text-white mb-5 mt-2">
+            proceder au payement
+        </p>
         <table class="table">
             <thead class="bg-gray-50">
                 <tr>
                     <th>
-                        ID
+                        designation
                     </th>
                     <th>
-                        Name
+                        quantité
                     </th>
                     <th>
-                        Email
+                        prix
                     </th>
                     <th>
-                        Created At
-                    </th>
-                    <th>
-                        option 1
+                        Total
                     </th>
                     <th>
                         option 2
@@ -58,25 +67,24 @@ export default {
             <tbody class="divide-y divide-gray-200">
                 <tr v-for="user in users" :key="user.id">
                     <td>
-                        {{ user.id }}
+                        {{ user.designation }}
                     </td>
                     <td>
-                        {{ user.name }}
+                        {{ user.nombre }}
                     </td>
                     <td>
-                        {{ user.email }}
+                        {{ user.prix_unitaire }}$
                     </td>
                     <td>
-                        {{ user.created_at }}
+                        {{ user.total }} $
                     </td>
                     <td>
-                        <a class="p-2 rounded bg-red-500 text-white m-2" href="#">supprimer</a>
-                    </td>
-                    <td>
-                        <a href="#" class="p-2 rounded bg-yellow-400 text-white m-2">modifier</a>
+                        <a href="#" class="p-2 rounded bg-yellow-400 text-white m-2">retirer</a>
                     </td>
                 </tr>
             </tbody>
         </table>
     </div>
 </template>
+
+
