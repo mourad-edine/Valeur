@@ -41,7 +41,7 @@ export default {
         </p>
     </div>
     <div class="sm:m-20 sm:bg-gray-100">
-        <p class="bg-orange-500 p-3 rounded text-white mb-5 mt-2">
+        <p class="bg-orange-500 p-3 rounded text-white mb-5">
             proceder au payement
         </p>
         <table class="table">

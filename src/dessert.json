@@ -2,26 +2,26 @@
     {
         "id": 1,
         "dessert_name": "Tiramisu express",
-        "prix": 9.46
+        "prix": 9
     },
     {
         "id": 2,
         "dessert_name": "glace à la vanille",
-        "prix": 4.49
+        "prix": 4
     },
     {
         "id": 3,
         "dessert_name": "Brownies express",
-        "prix": 2.05
+        "prix": 2
     },
     {
         "id": 4,
         "dessert_name": "Gâteau à l'ananas mixé rapide",
-        "prix": 8.08
+        "prix": 8
     },
     {
         "id": 5,
         "dessert_name": "Financier rapide",
-        "prix": 11.01
+        "prix": 11
     }
 ]

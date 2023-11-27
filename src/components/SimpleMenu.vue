@@ -26,6 +26,7 @@
                         <img src="../images/food.png" alt="" class="w-16 h-16">
                         <div class="m-2">
                             <span class="text-semibold m-2 text-gray-700">{{ item.nom }}</span>
+                            <span class="text-gray-400">prix :{{ item.prix }} $</span>
                         </div>
                     </div>
                 </div>
@@ -37,7 +38,7 @@
 <script>
 import axios from 'axios'
 export default {
-    name: 'Model',
+    name: 'Simplemenu',
     data() {
         return {
             produits: [],
@@ -54,7 +55,7 @@ export default {
         },
 
         informationId(id) {
-            this.$router.push({ name: 'categorie', params: { id } });
+            this.$router.push({ name: 'info', params: { id } });
         },
         async Prod() {
            await axios.get('http://127.0.0.1:8000/api/choses')

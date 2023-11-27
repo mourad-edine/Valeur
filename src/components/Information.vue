@@ -5,7 +5,7 @@
     </p>
     <div class="flex mt-4 mr-2  justify-end">
       <img src="../images/panier.png" alt="" class="sm:w-10 sm:h-10 h-10 w-full">
-      <h1 class=" text-rose-600 text-lg font-bold">{{  }}</h1>
+      <h1 class=" text-rose-600 text-lg font-bold">{{ }}</h1>
     </div>
   </div>
   <div>
@@ -30,17 +30,25 @@
         <div class="md:flex bg-gray-100 rounded mr-4">
           <div class="m-2 mt-0">
             <p class="font-semibold text-lg opacity-80 m-1 mt">nom du plats : <span class="font-light">
-              {{ informe.nom }}</span></p>
+                {{ choix }}</span></p>
             <p class="font-semibold text-lg opacity-80 m-1">prix : <span class="font-light">
-              {{ informe.prix }} $ </span></p>
-            <p class="font-semibold text-lg opacity-80 m-1 w-60">description : <span class="font-thin text-md"> {{informe.description}}</span></p>
+                {{ price }} $ </span></p>
+            <p class="text-lg m-1">supplements</p>
+            <hr class="m-2">
+            <div class="form-check" v-for="(test,ind) in informe" :key="ind">
+              <input class="form-check-input" type="checkbox" :value="test.prix" :id="'test.nom_supplement'+ind" v-model="suppl">
+
+              <label class="form-check-label" :for="'test.nom_supplement'+ind">
+                {{ test.nom_supplement }} - {{ test.prix }} $
+              </label>
+            </div>
           </div>
 
           <!--------->
         </div>
 
         <div class="m-1 mr-3">
-          <h1 class="text-lg">supplements</h1>
+          <h1 class="text-lg">choix de la sauce</h1>
           <hr class="mt-2 mb-3">
 
           <div class="form-check" v-for="(val, index) in sauces" :key="index">
@@ -78,7 +86,8 @@
         </div>
 
         <div class="">
-          <label class="p-2 bg-orange-500 text-white rounded m-1 sm:m-3"> total : {{ ((parseFloat(informe.prix) + somme + sum) *
+          <label class="p-2 bg-orange-500 text-white rounded m-1 sm:m-3"> total : {{ ((parseInt(price)+ sommesupp + somme +
+            sum) *
             nombre).toFixed(2) }}
             $</label>
           <button type="button" class="md:m-4 p-2 bg-orange-500 text-white rounded w-60 m-1 sm:m-3"
@@ -109,16 +118,19 @@ export default defineComponent({
   },
   data() {
     return {
+      sommesupp : 0,
+      suppl : [],
+      choix: '',
       nombre: 1,
-      price: 0,
+      price: "",
       comp: [],
       somme: 0,
       sauces: sauce,
       desserts: dessert,
       desserty: [],
       sum: 0,
-      informe : {
-        
+      informe: {
+
       }
     }
   },
@@ -138,16 +150,19 @@ export default defineComponent({
       }
     },
 
-    async Obtenir(id){
-      let url = `http://127.0.0.1:8000/api/produits/${id}`
-        await axios.get(url)
-        .then(reponse =>{
+    async Obtenir(id) {
+      let url = `http://127.0.0.1:8000/api/avoir/${id}`
+      await axios.get(url)
+        .then(reponse => {
           //console.log(reponse.data.produit)
-          this.informe = reponse.data.produit
+          this.price = reponse.data.prix
+          this.choix = reponse.data.nom_test
+          this.informe = reponse.data.supplements
+          console.log(reponse.data)
         })
     },
 
-    async Panier(){
+    async Panier() {
       Swal.fire({
         position: 'top-end',
         icon: 'success',
@@ -156,15 +171,15 @@ export default defineComponent({
         timer: 500
       })
       const form = new FormData()
-      form.append('designation', this.informe.nom)
-      form.append('nombre',this.nombre)
-      form.append('prix_unitaire',this.informe.prix)
-      form.append('total',((parseFloat(this.informe.prix) + this.somme + this.sum) * this.nombre).toFixed(2))
+      form.append('designation', this.choix)
+      form.append('nombre', this.nombre)
+      form.append('prix_unitaire', this.price)
+      form.append('total', ((parseFloat(this.price) + this.sommesupp + this.somme + this.sum) * this.nombre).toFixed(2))
 
       await axios.post('http://127.0.0.1:8000/api/enregistrement', form)
-      .then(reponse => {
-        console.log(reponse)
-      })
+        .then(reponse => {
+          console.log(reponse)
+        })
       this.$router.push({ name: 'home' });
 
     },
@@ -191,6 +206,11 @@ export default defineComponent({
       var tableau = []
       tableau = this.desserty.map((str) => parseInt(str))
       this.sum = tableau.reduce((accumuler, valeuractu) => accumuler + valeuractu, 0)
+    },
+    suppl: function () {
+      var tableau = []
+      tableau = this.suppl.map((str) => parseInt(str))
+      this.sommesupp = tableau.reduce((accumuler, valeuractu) => accumuler + valeuractu, 0)
     }
   }
 })

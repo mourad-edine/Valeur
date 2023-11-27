@@ -1,28 +1,28 @@
 [
     {
         "id": 1,
-        "sauce_name": "pain",
-        "prix": 9.46
+        "sauce_name": "sauce soja",
+        "prix": 9
     },
     {
         "id": 2,
         "sauce_name": "ketchup",
-        "prix": 4.49
+        "prix": 4
     },
     {
         "id": 3,
         "sauce_name": "moutarde",
-        "prix": 2.05
+        "prix": 2
     },
     {
         "id": 4,
         "sauce_name": "mayonaise",
-        "prix": 8.08
+        "prix": 8
     },
     {
         "id": 5,
         "sauce_name": "sauce chili",
-        "prix": 11.01
+        "prix": 11
     }
 
 ]
