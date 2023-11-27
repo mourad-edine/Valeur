@@ -81,8 +81,8 @@
         <div class="flex pb-2 md:pb-18 mr-6 lg:pb-18 xl:pb-18">
           <input type="text" class="p-2 rounded form-control m-1 border-2 border-gray-950 w-12" placeholder="1" min="1"
             max="40" v-model="nombre">
-          <img src="../images/plus.png" alt="" width="40" height="40" class="m-1 cursor-pointer" @click="augmenter">
-          <img src="../images/moins.png" alt="" width="40" height="40" class="m-1 cursor-pointer" @click="abaisser">
+          <img src="../../images/plus.png" alt="" width="40" height="40" class="m-1 cursor-pointer" @click="augmenter">
+          <img src="../../images/moins.png" alt="" width="40" height="40" class="m-1 cursor-pointer" @click="abaisser">
         </div>
 
         <div class="">
@@ -107,8 +107,8 @@
 import axios from 'axios'
 import Tooter from './footer.vue';
 import Swal from 'sweetalert2';
-import dessert from '../dessert.json'
-import sauce from '../sauce.json'
+import dessert from '../../dessert.json'
+import sauce from '../../sauce.json'
 import { defineComponent } from 'vue';
 export default defineComponent({
   name: 'information',

@@ -23,10 +23,9 @@
                 <div v-for="item in produits" class="cursor-pointer hover:bg-slate-200 p-2 rounded"
                     v-on:click="informationId(item.id)">
                     <div>
-                        <img src="../images/food.png" alt="" class="w-16 h-16">
+                        <img src="../../images/food.png" alt="" class="sm:w-32 sm:h-28 w-16 h-16">
                         <div class="m-2">
                             <span class="text-semibold m-2 text-gray-700">{{ item.nom }}</span>
-                            <span class="text-gray-400">prix :{{ item.prix }} $</span>
                         </div>
                     </div>
                 </div>
@@ -38,7 +37,7 @@
 <script>
 import axios from 'axios'
 export default {
-    name: 'Simplemenu',
+    name: 'Model',
     data() {
         return {
             produits: [],
@@ -55,7 +54,7 @@ export default {
         },
 
         informationId(id) {
-            this.$router.push({ name: 'info', params: { id } });
+            this.$router.push({ name: 'categorie', params: { id } });
         },
         async Prod() {
            await axios.get('http://127.0.0.1:8000/api/choses')

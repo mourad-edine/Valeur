@@ -1,10 +1,14 @@
 <script>
 export default{
-    name : 'Register',
+    name : 'Login',
 
     methods : {
         naviguer(){
-            this.$router.push({ name: 'login' });
+            this.$router.push({ name: 'register' });
+        },
+
+        connecter(){
+            
         }
     }
 }
@@ -16,19 +20,17 @@ export default{
     <link href='http://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
     <div class="logo"></div>
     <div class="login-block">
-        <h1>Register</h1>
+        <h1>Login</h1>
         <input type="text" value="" placeholder="Username" id="username" />
         <input type="password" value="" placeholder="Password" id="password" />
-        <button>soumettre</button>
+        <button>se connecter</button>
         <div>
-            <p class="text-gray-700 m-2 cursor-pointer" @click="naviguer">se connecter</p>
+            <p class="text-gray-700 m-2 cursor-pointer" @click="naviguer">créer un compte?</p>
         </div>
     </div>
 </template>
 
 <style>
-
-
 .logo {
     width: 213px;
     height: 36px;
@@ -110,5 +112,6 @@ export default{
 .login-block button:hover {
     background: #f97316;
 }
+
 
 </style>
