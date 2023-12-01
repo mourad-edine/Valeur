@@ -1,15 +1,21 @@
 <template>
     <!-- Modal -->
     <Layout>
-        <div class="" style="margin-top: 200px;margin-bottom: 360px;">
+
+        <div class="" style="margin-top: 100px;margin-bottom: 360px;">
+            <div class="flex justify-center m-5">
+                <h1 class="text-xl text-gray-700 font-semibold">Menu simple</h1>
+            </div>
+            <hr class="m-2">
             <div class="sm:grid grid-cols-2">
-                <div class="sm:flex sm:ml-20 shadow-md cursor-pointer" v-for="item in produits" @click="informationId(item.id)">
+                <div class="sm:flex sm:ml-20 shadow-md cursor-pointer" v-for="item in produits"
+                    @click="informationId(item.id)">
                     <div class="w-20 h-20">
                         <img src="../../images/app.png" alt="" class="w-16 sm:h-12 m-2">
                     </div>
                     <div class="ml-5 mt-2 mb-2">
                         <p class="text-red-700 font-bold">{{ item.nom }}</p>
-                        <p class="font-semibold">18 Août 2019</p>
+                        <p class="font-semibold">Disponible</p>
 
                     </div>
                 </div>
@@ -62,7 +68,7 @@ export default {
         if (user) {
             this.$router.push({ name: 'home' });
 
-    }
+        }
     },
     props: ['command'],
     components: { Layout }

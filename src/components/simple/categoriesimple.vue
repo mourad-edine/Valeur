@@ -15,10 +15,11 @@ export default {
             let url = `http://127.0.0.1:8000/api/test/${id}`;
             await axios.get(url)
                 .then(reponse => {
-                //console.log(reponse.data.produit)
-                this.nomprod = reponse.data.nom;
-                this.valide = reponse.data.supplements;
-            });
+                    //console.log(reponse.data.produit)
+                    this.nomprod = reponse.data.nom;
+                    console.log(reponse.data)
+                    this.valide = reponse.data.supplements;
+                });
         },
         affiche() {
             Swal.fire({
@@ -39,19 +40,23 @@ export default {
 
 <template>
     <Layout>
-    <div class="" style="margin-top: 200px;margin-bottom: 500px;">
-        <div class="sm:grid grid-cols-2">
-            <div class="sm:flex sm:ml-20 shadow-md cursor-pointer" v-for="item in valide" @click="affiche">
-                <div class="w-20 h-20">
-                    <img src="../../images/app.png" alt="" class="w-16 sm:h-12 m-2">
-                </div>
-                <div class="ml-5 mt-2 mb-2">
-                    <p class="text-red-700 font-bold">{{ item.nom_categorie }}</p>
-                    <p class="font-semibold">{{ item.prix }} $</p>
+        <div class="" style="margin-top: 100px;margin-bottom: 500px;">
+            <div class="flex justify-center m-5">
+                <h1 class="text-xl text-gray-700 font-semibold">Categorie - {{ nomprod }}</h1>
+            </div>
+            <hr class="m-2">
+            <div class="sm:grid grid-cols-2">
+                <div class="sm:flex sm:ml-20 shadow-md cursor-pointer" v-for="item in valide" @click="affiche">
+                    <div class="w-20 h-20">
+                        <img src="../../images/app.png" alt="" class="w-16 sm:h-12 m-2">
+                    </div>
+                    <div class="ml-5 mt-2 mb-2">
+                        <p class="text-red-700 font-bold">{{ item.nom_categorie }}</p>
+                        <p class="font-semibold">{{ item.prix }} $</p>
 
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-</Layout>
+    </Layout>
 </template>

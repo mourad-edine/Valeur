@@ -32,7 +32,11 @@ export default {
 
 <template>
     <Layout2>
-        <div class="" style="margin-top: 200px;margin-bottom: 490px;">
+        <div class="" style="margin-top: 100px;margin-bottom: 360px;">
+            <div class="flex justify-center m-5">
+                <h1 class="text-xl text-gray-700 font-semibold">Categorie - {{ nomprod }}</h1>
+            </div>
+            <hr class="m-2">
         <div class="sm:grid grid-cols-2">
             <div class="sm:flex sm:ml-20 shadow-md cursor-pointer" v-for="item in valide" @click="informationId(item.id)">
                 <div class="w-20 h-20">

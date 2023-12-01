@@ -1,7 +1,11 @@
 <template>
     <!-- Modal -->
 <Layout2>
-    <div class="" style="margin-top: 200px;margin-bottom: 360px;">
+    <div class="" style="margin-top: 100px;margin-bottom: 360px;">
+        <div class="flex justify-center m-5">
+                <h1 class="text-xl text-gray-700 font-semibold">Menu</h1>
+            </div>
+            <hr class="m-2">
             <div class="sm:grid grid-cols-2">
                 <div class="sm:flex sm:ml-20 shadow-md cursor-pointer" v-for="item in produits" @click="informationId(item.id)">
                     <div class="w-20 h-20">
