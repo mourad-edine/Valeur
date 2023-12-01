@@ -11,6 +11,8 @@ import Addproduct from '../components/admin/addProduct.vue'
 import Liste from '../components/admin/listed.vue'
 import dispo from '../components/admin/ProduitDispo.vue'
 
+import sous from '../components/admin/sousproduit.vue'
+import supplement from '../components/admin/supplement.vue'
 import dashboard from '../components/admin/Dashboard.vue'
 
 const router = createRouter({
@@ -87,6 +89,16 @@ const router = createRouter({
       component: dispo
     },
 
+    {
+      path: '/souproduit/:id',
+      name: 'sousproduit',
+      component: sous
+    },
+    {
+      path: '/supplement/:id',
+      name: 'supplement',
+      component: supplement
+    },
 
   ]
 })

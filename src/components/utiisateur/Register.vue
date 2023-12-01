@@ -72,16 +72,14 @@ export default {
 
 <style>
 .logo {
-    width: 213px;
+    width: 300px;
     height: 36px;
-    background: url('http://i.imgur.com/fd8Lcso.png') no-repeat;
     margin: 30px auto;
 }
 
 .login-block {
     width: 320px;
     padding: 20px;
-    background: #f3f4f6;
     border-radius: 5px;
     border-top: 5px solid #f97316;
     margin: 0 auto;

@@ -45,7 +45,7 @@ export default {
             proceder au payement
         </p>
         <table class="table">
-            <thead class="bg-gray-50">
+            <thead class="bg-dark text-white">
                 <tr>
                     <th>
                         designation
