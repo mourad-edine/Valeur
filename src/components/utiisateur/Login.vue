@@ -1,27 +1,23 @@
 <script>
 import axios from 'axios';
 import Swal from 'sweetalert2';
+import Layout from '../simple/layout/Layout.vue';
 export default {
     name: 'Register',
-
-  
     data() {
         return {
             nom: '',
             password: ''
-        }
+        };
     },
     methods: {
         naviguer() {
-            this.$router.push({ name: 'login' });
+            this.$router.push({ name: 'register' });
         },
-
         async verifier() {
-
-            const form = new FormData()
-            form.append('nom', this.nom)
-            form.append('password', this.password)
-
+            const form = new FormData();
+            form.append('nom', this.nom);
+            form.append('password', this.password);
             if (this.nom == '' || this.password == '') {
                 Swal.fire({
                     position: 'top-end',
@@ -29,45 +25,52 @@ export default {
                     title: 'vous devez tout completer',
                     showConfirmButton: false,
                     timer: 1500
-                })
-
-            } else {
+                });
+            }
+            else {
                 await axios.post('http://127.0.0.1:8000/api/verifier', form)
                     .then(reponse => {
-                        console.log(reponse.data)
-                        localStorage.setItem('client_id' , JSON.stringify(reponse.data))
-                    })
-                this.$router.push({ name: 'home' })
+                    console.log(reponse.data);
+                    localStorage.setItem('client_id', JSON.stringify(reponse.data));
+                });
+                this.$router.push({ name: 'home' });
                 Swal.fire({
                     position: 'top-end',
                     icon: 'info',
                     title: 'heureux de vous revoir',
                     showConfirmButton: false,
                     timer: 1500
-                })
+                });
             }
         },
-
     },
+    components: { Layout },
+    mounted(){
+        let user = localStorage.getItem('client_id');
+        if (user) {
+            this.$router.push({ name: 'home' });
+        }
+    }
 }
 
 </script>
 
 
 <template>
-    <link href='http://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
+    <Layout>
     <div class="logo"></div>
-    <div class="login-block">
+    <div class="login-block" style="margin-bottom: 300px;">
         <form>
             <h1>Login</h1>
             <input type="text" placeholder="Username" id="username" v-model="nom" required />
             <input type="password" placeholder="Password" id="password" v-model="password" required />
             <button type="button" @click="verifier">soumettre</button>
             <div>
-                <p class="text-gray-700 m-2 cursor-pointer" @click="naviguer">se connecter</p>
+                <p class="text-gray-700 m-2 cursor-pointer" @click="naviguer">creer un compte?</p>
             </div>
         </form>
     </div>
+</Layout>
 </template>
 
 <style>

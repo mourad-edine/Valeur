@@ -1,78 +1,58 @@
 <template>
     <!-- Modal -->
-    <div class="">
-        <div class="">
-            <div class="md:flex justify-between">
-                <div>
-                    <h1 class="mt-4  text-lg font-semibold opacity-60">listes de recettes</h1>
-                </div>
-                
-                <div>
-                    <p class="bg-orange-500 text-white p-2 rounded h-10 md:w-52 w-full cursor-pointer mt-4" @click="naviguer">liste
-                        des
-                        commandes
-                    </p>
-                    
-                </div>
-            </div>
-            <hr>
+<Layout2>
+    <div class="" style="margin-top: 200px;margin-bottom: 360px;">
+            <div class="sm:grid grid-cols-2">
+                <div class="sm:flex sm:ml-20 shadow-md cursor-pointer" v-for="item in produits" @click="informationId(item.id)">
+                    <div class="w-20 h-20">
+                        <img src="../../images/app.png" alt="" class="w-16 sm:h-12 m-2">
+                    </div>
+                    <div class="ml-5 mt-2 mb-2">
+                        <p class="text-red-700 font-bold">{{ item.nom }}</p>
+                        <p class="font-semibold">18 Août 2019</p>
 
-            <div class="flex mt-3">
-            </div>
-        </div>
-        <div class="">
-            <div class="grid sm:grid-cols-2 lg:grid-cols-3 mt-2">
-                <div v-for="item in produits" class="cursor-pointer hover:bg-slate-200 p-2 rounded"
-                    v-on:click="informationId(item.id)">
-                    <div>
-                        <img src="../../images/food.png" alt="" class="sm:w-32 sm:h-28 w-16 h-16">
-                        <div class="m-2">
-                            <span class="text-semibold m-2 text-gray-700">{{ item.nom }}</span>
-                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
+</Layout2>
 </template>
 
 <script>
 import axios from 'axios'
+import Layout2 from './Layout/Layout2.vue'
 export default {
     name: 'Model',
     data() {
         return {
             produits: [],
-        }
+        };
     },
-
     methods: {
-        
         afficher(nom) {
-            this.compte++
-            console.log(nom)
+            this.compte++;
+            console.log(nom);
         },
         naviguer() {
             this.$router.push({ name: 'liste' });
         },
-
         informationId(id) {
             this.$router.push({ name: 'categorie', params: { id } });
         },
         async Prod() {
-           await axios.get('http://127.0.0.1:8000/api/choses')
+            await axios.get('http://127.0.0.1:8000/api/choses')
                 .then((response) => {
-                    this.produits = response.data.produit;
-                })
+                this.produits = response.data.produit;
+            })
                 .catch(error => {
-                    console.error('Erreur lors de la récupération des données:', error);
-                });
+                console.error('Erreur lors de la récupération des données:', error);
+            });
         }
-
     },
     mounted() {
         this.Prod();
     },
-    props: ['command']
+    props: ['command'],
+    components: { Layout2 }
 }
 </script>

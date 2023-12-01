@@ -1,58 +1,50 @@
 <script>
 import axios from 'axios'
+import Layout2 from './Layout/Layout2.vue'
 export default {
     name: 'categories',
     data() {
         return {
-            nomprod :"",
-            valide: {
-
-            }
-        }
+            nomprod: "",
+            valide: {}
+        };
     },
     methods: {
         async Obtenir(id) {
-            let url = `http://127.0.0.1:8000/api/test/${id}`
+            let url = `http://127.0.0.1:8000/api/test/${id}`;
             await axios.get(url)
                 .then(reponse => {
                     //console.log(reponse.data.produit)
-                    this.nomprod = reponse.data.nom
-                    this.valide = reponse.data.supplements
-                })
+                    this.nomprod = reponse.data.nom;
+                    this.valide = reponse.data.supplements;
+                });
         },
-
         informationId(id) {
             this.$router.push({ name: 'info', params: { id } });
         },
-
-
     },
-
     mounted() {
-        this.Obtenir(this.$route.params.id)
+        this.Obtenir(this.$route.params.id);
     },
+    components: { Layout2 }
 }
 </script>
 
 <template>
-    <div class="bg-orange-500 p-3">
-        <p class="text-lg m-7 text-white font-bold">
-            categorie de {{ nomprod }}
-        </p>
-    </div>
-    <div class="">
-        <div class="flex justify-center m-3">
-            <h1 class="text-lg font-semibold">{{ nomprod }}</h1>
-        </div>
-        <hr class="m-2">
+    <Layout2>
+        <div class="" style="margin-top: 200px;margin-bottom: 490px;">
+        <div class="sm:grid grid-cols-2">
+            <div class="sm:flex sm:ml-20 shadow-md cursor-pointer" v-for="item in valide" @click="informationId(item.id)">
+                <div class="w-20 h-20">
+                    <img src="../../images/app.png" alt="" class="w-16 sm:h-12 m-2">
+                </div>
+                <div class="ml-5 mt-2 mb-2">
+                    <p class="text-red-700 font-bold">{{ item.nom_categorie }}</p>
+                    <p class="font-semibold">{{ item.prix }} $</p>
 
-            <div class="grid sm:grid-cols-4 lg:grid-cols-4 mt-2 sm:ml-52 sm:mr-52">
-                <div v-for="item in valide" class="cursor-pointer bg-slate-200 hover:bg-slate-200 p-2 rounded m-2"
-                    @click="informationId(item.id)">
-                        <div class="m-2">
-                            <span class="text-semibold m-2 text-gray-700">{{ item.nom_categorie }}</span> || <span class="text-semibold m-2 text-gray-700"> {{ item.prix }}$</span>
-                        </div>
                 </div>
             </div>
         </div>
+    </div>
+    </Layout2>
 </template>

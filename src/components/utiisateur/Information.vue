@@ -1,27 +1,6 @@
 <template>
-  <div class="bg-orange-500 p-3 flex justify-between">
-    <p class="text-lg m-7 text-white font-bold ml-13">
-      customiser votre plat
-    </p>
-    <div class="flex mt-4 mr-2  justify-end">
-      <img src="../images/panier.png" alt="" class="sm:w-10 sm:h-10 h-10 w-full">
-      <h1 class=" text-rose-600 text-lg font-bold">{{ }}</h1>
-    </div>
-  </div>
-  <div>
-    <div class="md:flex justify-evenly">
-
-      <p class="text-lg font-light mt-3 ml-5 cursor-pointer ">
-        Déscription du plats
-      </p>
-      <hr class="m-2">
-      <div>
-        <p class="bg-orange-500 text-white p-2 rounded h-10 md:w-52 w-full cursor-pointer mt-4" @click="naviguer">
-          retour au listes
-        </p>
-      </div>
-    </div>
-
+<Layout2>
+  <div style="margin-top: 200px;">
     <div class="bg-gray-50 rounded p-3">
       <div class="flex sm:justify-evenly justify-start">
         <!------>
@@ -100,24 +79,24 @@
       </div>
     </div>
 
-    <Tooter />
   </div>
+</Layout2>
 </template>
 
 
 <script>
 import axios from 'axios'
-import Tooter from './footer.vue';
 import Swal from 'sweetalert2';
 import dessert from '../../dessert.json'
 import sauce from '../../sauce.json'
 import { defineComponent } from 'vue';
+import Layout2 from './Layout/Layout2.vue';
 export default defineComponent({
   name: 'information',
 
   components: {
-    Tooter
-  },
+    Layout2
+},
   data() {
     return {
       im: null,

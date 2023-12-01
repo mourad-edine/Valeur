@@ -1,34 +1,31 @@
 <script>
 import axios from 'axios';
 import Swal from 'sweetalert2';
+import Layout from '../simple/layout/Layout.vue';
 export default {
     name: 'Register',
-    mounted(){
-        let user = localStorage.getItem('client_id')
-        if(user){
-            this.$router.push({name : 'home'})
+    mounted() {
+        let user = localStorage.getItem('client_id');
+        if (user) {
+            this.$router.push({ name: 'home' });
         }
     },
     data() {
         return {
-            im : 0,
             nom: '',
             adresse: '',
             password: ''
-        }
+        };
     },
     methods: {
         naviguer() {
             this.$router.push({ name: 'login' });
         },
-
         async ajouter() {
-
-            const form = new FormData()
-            form.append('nom', this.nom)
-            form.append('adresse', this.adresse)
-            form.append('password', this.password)
-
+            const form = new FormData();
+            form.append('nom', this.nom);
+            form.append('adresse', this.adresse);
+            form.append('password', this.password);
             if (this.nom == '' || this.adresse == '' || this.password == '') {
                 Swal.fire({
                     position: 'top-end',
@@ -36,13 +33,13 @@ export default {
                     title: 'vous devez tout completer',
                     showConfirmButton: false,
                     timer: 1500
-                })
-
-            } else {
+                });
+            }
+            else {
                 await axios.post('http://127.0.0.1:8000/api/adduser', form)
                     .then(reponse => {
-                        console.log(reponse)
-                    })
+                    console.log(reponse);
+                });
                 this.$router.push({ name: 'home' });
                 Swal.fire({
                     position: 'top-end',
@@ -50,24 +47,24 @@ export default {
                     title: 'inscription reussi',
                     showConfirmButton: false,
                     timer: 1000
-                })
+                });
             }
-
         },
-    }
+    },
+    components: { Layout }
 }
 
 </script>
 
 
 <template>
-    <link href='http://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
+    <Layout>
     <div class="logo"></div>
-    <div class="login-block">
+    <div class="login-block" style="margin-bottom: 250px;">
         <form>
             <h1>Register</h1>
             <input type="text" placeholder="Username" id="username" v-model="nom" required />
-            <input type="text" placeholder="adresse" id="password" v-model="adresse" required />
+            <input type="text" placeholder="adresse" id="adresse" v-model="adresse" required />
             <input type="password" placeholder="Password" id="password" v-model="password" required />
             <button type="button" @click="ajouter">soumettre</button>
             <div>
@@ -75,6 +72,7 @@ export default {
             </div>
         </form>
     </div>
+</Layout>
 </template>
 
 <style>

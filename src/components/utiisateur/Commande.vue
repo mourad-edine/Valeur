@@ -1,8 +1,8 @@
 <script>
 import Swal from 'sweetalert2';
 import axios from 'axios';
+import Layout2 from './Layout/Layout2.vue';
 export default {
-
     data() {
         return {
             users: []
@@ -12,55 +12,39 @@ export default {
         async fetchData() {
             await axios.get('http://127.0.0.1:8000/api/hote')
                 .then((response) => {
-                    this.users = response.data.utilisateur;
-                })
+                this.users = response.data.utilisateur;
+            })
                 .catch(error => {
-                    console.error('Erreur lors de la récupération des données:', error);
-                });
-        },
-
-        naviguer() {
-            this.$router.push({ name: 'home' });
+                console.error('Erreur lors de la récupération des données:', error);
+            });
         },
 
         async supprimer(id) {
-            let url = `http://127.0.0.1:8000/api/deletecom/${id}`
+            let url = `http://127.0.0.1:8000/api/deletecom/${id}`;
             await axios.delete(url)
                 .then(reponse => {
-                    console.log(reponse)
-                })
-
+                console.log(reponse);
+            });
             Swal.fire({
                 position: 'top-end',
                 icon: 'success',
                 title: 'reussi',
                 showConfirmButton: false,
                 timer: 1000
-            })
-
+            });
             this.fetchData();
         },
     },
     mounted() {
-        this.fetchData()
-        
+        this.fetchData();
     },
-
+    components: { Layout2 }
 }
 
 </script>
 <template>
-    <div class="bg-orange-500 p-3">
-        <p class="text-lg m-7 text-white font-bold">
-            listes des commandes
-        </p>
-    </div>
-    <div>
-        <p class="p-2 bg-orange-500 sm:ml-20 text-white rounded cursor-pointer mt-3 sm:w-20 mb-2" @click="naviguer">
-            retour au liste
-        </p>
-    </div>
-    <div class="sm:m-20 sm:bg-gray-100">
+    <Layout2>
+    <div class="sm:m-20 sm:bg-gray-100" style="margin-bottom: 360px;">
         <p class="bg-orange-500 p-3 rounded text-white mb-5">
             proceder au payement
         </p>
@@ -105,6 +89,7 @@ export default {
             </tbody>
         </table>
     </div>
+</Layout2>
 </template>
 
 
