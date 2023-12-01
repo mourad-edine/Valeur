@@ -70,6 +70,7 @@
 </footer>
 </template>
 <script setup>
+name : 'Layout'
 import { onMounted } from "vue";
 import {
     Dropdown,
@@ -86,9 +87,7 @@ onMounted(() => {
 </script>
 
 <script>
-export default{
-    name : 'Layout'
-}
+
 </script>
 
 
