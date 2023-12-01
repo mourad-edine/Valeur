@@ -35,10 +35,11 @@
                 {{ price }} $ </span></p>
             <p class="text-lg m-1">supplements</p>
             <hr class="m-2">
-            <div class="form-check" v-for="(test,ind) in informe" :key="ind">
-              <input class="form-check-input" type="checkbox" :value="test.prix" :id="'test.nom_supplement'+ind" v-model="suppl">
+            <div class="form-check" v-for="(test, ind) in informe" :key="ind">
+              <input class="form-check-input" type="checkbox" :value="test.prix" :id="'test.nom_supplement' + ind"
+                v-model="suppl">
 
-              <label class="form-check-label" :for="'test.nom_supplement'+ind">
+              <label class="form-check-label" :for="'test.nom_supplement' + ind">
                 {{ test.nom_supplement }} - {{ test.prix }} $
               </label>
             </div>
@@ -86,7 +87,8 @@
         </div>
 
         <div class="">
-          <label class="p-2 bg-orange-500 text-white rounded m-1 sm:m-3"> total : {{ ((parseInt(price)+ sommesupp + somme +
+          <label class="p-2 bg-orange-500 text-white rounded m-1 sm:m-3"> total : {{ ((parseInt(price) + sommesupp + somme
+            +
             sum) *
             nombre).toFixed(2) }}
             $</label>
@@ -118,8 +120,9 @@ export default defineComponent({
   },
   data() {
     return {
-      sommesupp : 0,
-      suppl : [],
+      im: null,
+      sommesupp: 0,
+      suppl: [],
       choix: '',
       nombre: 1,
       price: "",
@@ -175,7 +178,7 @@ export default defineComponent({
       form.append('nombre', this.nombre)
       form.append('prix_unitaire', this.price)
       form.append('total', ((parseFloat(this.price) + this.sommesupp + this.somme + this.sum) * this.nombre).toFixed(2))
-
+      form.append('client_id', this.im)
       await axios.post('http://127.0.0.1:8000/api/enregistrement', form)
         .then(reponse => {
           console.log(reponse)
@@ -191,6 +194,10 @@ export default defineComponent({
   },
 
   mounted() {
+    let user = localStorage.getItem('client_id')
+    this.im = JSON.parse(user).id
+
+
     this.$nextTick(() => {
       window.scrollTo(0, document.body.scrollHeight);
     });

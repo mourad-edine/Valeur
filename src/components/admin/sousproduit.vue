@@ -8,12 +8,12 @@ export default {
 
     components: {
         Layout,
-        
+
     },
     data() {
         return {
-            price : '',
-            anarana : '',
+            price: '',
+            anarana: '',
             nomprod: "",
             valide: {
 
@@ -33,7 +33,7 @@ export default {
 
         async supprimer(id) {
             let url = `http://127.0.0.1:8000/api/deletesous/${id}`
-           await axios.delete(url)
+            await axios.delete(url)
                 .then(reponse => {
                     console.log(reponse)
                 })
@@ -46,7 +46,7 @@ export default {
                 timer: 1000
             })
 
-            this.$router.push({name : 'dispo'})
+            this.$router.push({ name: 'dispo' })
         },
 
         informationId(id) {
@@ -55,9 +55,9 @@ export default {
 
         async ajouter() {
             const form = new FormData()
-            form.append('nom',this.anarana)
-            form.append('prix',this.price)
-            form.append('produit_id',this.$route.params.id)
+            form.append('nom', this.anarana)
+            form.append('prix', this.price)
+            form.append('produit_id', this.$route.params.id)
 
             if (this.anarana == '' || this.price == '') {
                 Swal.fire({
@@ -69,11 +69,11 @@ export default {
                 })
 
             } else {
-                await axios.post('http://127.0.0.1:8000/api/addsous',form)
+                await axios.post('http://127.0.0.1:8000/api/addsous', form)
                     .then(reponse => {
                         console.log(reponse)
                     })
-                
+
                 Swal.fire({
                     position: 'top-end',
                     icon: 'success',
@@ -125,8 +125,8 @@ export default {
                                     <div class="modal-body">
                                         <input type="text" placeholder="nom sous-categorie" class="form-control  m-2"
                                             v-model="anarana" required>
-                                        <input type="text" placeholder="prix" class="form-control  m-2"
-                                            v-model="price" required>
+                                        <input type="text" placeholder="prix" class="form-control  m-2" v-model="price"
+                                            required>
                                     </div>
                                     <div class="modal-footer">
                                         <button type="button" class="p-2 bg-orange-500 rounded text-white"

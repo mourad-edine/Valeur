@@ -6,11 +6,13 @@
                 <div>
                     <h1 class="mt-4  text-lg font-semibold opacity-60">listes de recettes</h1>
                 </div>
+                
                 <div>
                     <p class="bg-orange-500 text-white p-2 rounded h-10 md:w-52 w-full cursor-pointer mt-4" @click="naviguer">liste
                         des
                         commandes
                     </p>
+                    
                 </div>
             </div>
             <hr>
@@ -45,6 +47,7 @@ export default {
     },
 
     methods: {
+        
         afficher(nom) {
             this.compte++
             console.log(nom)

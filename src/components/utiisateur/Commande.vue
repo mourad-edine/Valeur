@@ -1,4 +1,5 @@
 <script>
+import Swal from 'sweetalert2';
 import axios from 'axios';
 export default {
 
@@ -21,9 +22,27 @@ export default {
         naviguer() {
             this.$router.push({ name: 'home' });
         },
+
+        async supprimer(id) {
+            let url = `http://127.0.0.1:8000/api/deletecom/${id}`
+            await axios.delete(url)
+                .then(reponse => {
+                    console.log(reponse)
+                })
+
+            Swal.fire({
+                position: 'top-end',
+                icon: 'success',
+                title: 'reussi',
+                showConfirmButton: false,
+                timer: 1000
+            })
+
+            this.fetchData();
+        },
     },
     mounted() {
-        this.fetchData();
+        this.fetchData()
         
     },
 
@@ -80,7 +99,7 @@ export default {
                         {{ user.total }} $
                     </td>
                     <td>
-                        <a href="#" class="p-2 rounded bg-yellow-400 text-white m-2">retirer</a>
+                        <a @click="supprimer(user.id)" href="#" class="p-2 rounded bg-yellow-400 text-white m-2">retirer</a>
                     </td>
                 </tr>
             </tbody>
