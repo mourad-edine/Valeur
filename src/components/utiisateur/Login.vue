@@ -1,16 +1,54 @@
 <script>
-export default{
-    name : 'Login',
+import axios from 'axios';
+import Swal from 'sweetalert2';
+export default {
+    name: 'Register',
 
-    methods : {
-        naviguer(){
-            this.$router.push({ name: 'register' });
+  
+    data() {
+        return {
+            nom: '',
+            password: ''
+        }
+    },
+    methods: {
+        naviguer() {
+            this.$router.push({ name: 'login' });
         },
 
-        connecter(){
-            
-        }
-    }
+        async verifier() {
+
+            const form = new FormData()
+            form.append('nom', this.nom)
+            form.append('password', this.password)
+
+            if (this.nom == '' || this.password == '') {
+                Swal.fire({
+                    position: 'top-end',
+                    icon: 'warning',
+                    title: 'vous devez tout completer',
+                    showConfirmButton: false,
+                    timer: 1500
+                })
+
+            } else {
+                await axios.post('http://127.0.0.1:8000/api/verifier', form)
+                    .then(reponse => {
+                        console.log(reponse.data)
+                        localStorage.setItem('client_id' , JSON.stringify(reponse.data))
+                    })
+                this.$router.push({ name: 'home' })
+                Swal.fire({
+                    position: 'top-end',
+                    icon: 'info',
+                    title: 'heureux de vous revoir',
+                    showConfirmButton: false,
+                    timer: 1500
+                })
+            }
+        },
+
+    },
 }
 
 </script>
@@ -20,13 +58,15 @@ export default{
     <link href='http://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
     <div class="logo"></div>
     <div class="login-block">
-        <h1>Login</h1>
-        <input type="text" value="" placeholder="Username" id="username" />
-        <input type="password" value="" placeholder="Password" id="password" />
-        <button>se connecter</button>
-        <div>
-            <p class="text-gray-700 m-2 cursor-pointer" @click="naviguer">créer un compte?</p>
-        </div>
+        <form>
+            <h1>Login</h1>
+            <input type="text" placeholder="Username" id="username" v-model="nom" required />
+            <input type="password" placeholder="Password" id="password" v-model="password" required />
+            <button type="button" @click="verifier">soumettre</button>
+            <div>
+                <p class="text-gray-700 m-2 cursor-pointer" @click="naviguer">se connecter</p>
+            </div>
+        </form>
     </div>
 </template>
 
@@ -40,7 +80,6 @@ export default{
 .login-block {
     width: 320px;
     padding: 20px;
-    background: #F1EFEF;
     border-radius: 5px;
     border-top: 5px solid #f97316;
     margin: 0 auto;
@@ -88,7 +127,8 @@ export default{
     background-size: 16px 80px;
 }
 
-.login-block input:active, .login-block input:focus {
+.login-block input:active,
+.login-block input:focus {
     border: 1px solid #f97316;
 }
 
@@ -111,6 +151,4 @@ export default{
 .login-block button:hover {
     background: #f97316;
 }
-
-
 </style>

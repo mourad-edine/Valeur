@@ -28,6 +28,7 @@ export default {
     },
     mounted() {
         this.fetchData();
+        setInterval(this.fetchData,5000)
     },
 
 }

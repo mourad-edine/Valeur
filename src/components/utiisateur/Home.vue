@@ -5,7 +5,7 @@
         </p>
     </div>
     <div class="md:flex justify-evenly">
-        <Model />     
+        <Model />
     </div>
 </template>
 
@@ -13,12 +13,21 @@
 import Model from './Model.vue';
 export default {
     name: "maison",
+    data() {
+        return {
+            im: null
+        }
+    },
 
+    mounted() {
+        let user = localStorage.getItem('client_id')
+        console.log(user.message)
+    },
     components: {
         Model
     },
     methods: {
-        
+
     }
 }
 </script>

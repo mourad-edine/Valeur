@@ -7,7 +7,6 @@ import Register from '../components/utiisateur/Register.vue'
 import categories from '../components/utiisateur/Categorie.vue'
 import Simplemenu from '../components/simple/SimpleMenu.vue'
 import categoriesimple from '../components/simple/categoriesimple.vue'
-import Addproduct from '../components/admin/addProduct.vue'
 import Liste from '../components/admin/listed.vue'
 import dispo from '../components/admin/ProduitDispo.vue'
 
@@ -71,11 +70,6 @@ const router = createRouter({
       component: dashboard
     },
 
-    {
-      path: '/addproduct',
-      name: 'addproduct',
-      component: Addproduct
-    },
 
     {
       path: '/listes',

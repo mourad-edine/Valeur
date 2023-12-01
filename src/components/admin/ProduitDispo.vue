@@ -175,6 +175,7 @@ export default {
 
     mounted() {
         this.Prod();
+        
     },
 }
 </script>

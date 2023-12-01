@@ -3,8 +3,15 @@ import axios from 'axios';
 import Swal from 'sweetalert2';
 export default {
     name: 'Register',
+    mounted(){
+        let user = localStorage.getItem('client_id')
+        if(user){
+            this.$router.push({name : 'home'})
+        }
+    },
     data() {
         return {
+            im : 0,
             nom: '',
             adresse: '',
             password: ''

@@ -4,7 +4,6 @@
             <h2>Titre</h2>
             <ul>
                 <li @click="home"><a href="#"><i class="fas fa-home"></i>Home</a></li>
-                <li @click="ajouter"><a href="#"><i class="fas fa-user"></i>gestion de stock</a></li>
                 <li @click="liste"><a href="#"><i class="fas fa-address-card"></i>commandes</a></li>
                 <li @click="dispo"><a href="#"><i class="fas fa-user"></i>produits dispo</a></li>
 
