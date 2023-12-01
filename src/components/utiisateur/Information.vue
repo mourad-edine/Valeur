@@ -1,6 +1,6 @@
 <template>
 <Layout2>
-  <div style="margin-top: 200px;">
+  <div style="margin-top: 100px;">
     <div class="bg-gray-50 rounded p-3">
       <div class="flex sm:justify-evenly justify-start">
         <!------>

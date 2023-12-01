@@ -101,13 +101,10 @@ export default {
 
 <template>
     <Layout>
-        <div class="main_content">
-            <div class="header">DASHBOARD > Accueil</div>
-            <div class="info">
+        <div class="main_content" style="margin-top: 100px;">
                 <div>
-                    <div class="flex justify-between">
-                        <h1 class="text-2xl">
-                            supplements de sous categories
+                    <div class="flex justify-around">
+                        <h1 class="text-xl">
                         </h1>
                         <!---modal-->
                         <p class="p-2 bg-blue-500 rounded text-white cursor-pointer" data-bs-toggle="modal"
@@ -142,8 +139,8 @@ export default {
                         </div>
 
                     </div>
-                    <div class="m-10">
-                        <table class="table">
+                    <div class="m-10 flex justify-center">
+                        <table class="table" style="width: 700px;">
                             <thead>
                                 <tr>
                                     <th scope="col">id</th>
@@ -168,6 +165,5 @@ export default {
                     </div>
                 </div>
             </div>
-        </div>
     </Layout>
 </template>

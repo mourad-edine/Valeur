@@ -37,16 +37,15 @@ export default {
 <template>
     <Layout>
 
-        <div class="main_content">
-            <div class="header">DASHBOARD > Accueil</div>
+        <div class="main_content" style="margin-top: 100px;">
             <div class="info">
                 <div>
-                    <h1 class="text-2xl">
+                    <h1 class="text-xl m-5">
                         listes des commandes
                     </h1>
                     <hr class="m-2">
-                    <div class="m-10">
-                        <table class="table">
+                    <div class="m-10 flex justify-center">
+                        <table class="table" style="width: 700px;">
                         <thead class="bg-dark text-white">
                             <tr>
                                 <th>
@@ -93,7 +92,7 @@ export default {
                                     details
                                 </td>
                                 <td>
-                                    <a href="#" class="p-2 rounded bg-yellow-400 text-white m-2">valider la commandes</a>
+                                    <a href="#" class="text-yellow-700">valider</a>
                                 </td>
                                 
                             </tr>

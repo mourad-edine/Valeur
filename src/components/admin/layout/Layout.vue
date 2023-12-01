@@ -1,114 +1,86 @@
 <template>
-    <div class="wrapper">
-        <div class="sidebar">
-            <h2>Titre</h2>
-            <ul>
-                <li @click="home"><a href="#"><i class="fas fa-home"></i>Home</a></li>
-                <li @click="liste"><a href="#"><i class="fas fa-address-card"></i>commandes</a></li>
-                <li @click="dispo"><a href="#"><i class="fas fa-user"></i>produits dispo</a></li>
+    <header class="fixed top-0 w-full bg-white text-gray-800 z-10">
+        <nav class="mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <div class="flex items-center">
+                    <router-Link to="/dashboard" class="flex-shrink-0">
+                        <img class="h-12 w-12" src="../../../images/panier.png" alt="Workflow logo">
+                    </router-Link>
+                    <div class="hidden md:block">
+                        <div class="ml-10 flex items-baseline space-x-4">
+                            <router-Link to="/dashboard"
+                                class="px-3 py-2 rounded-md text-sm font-medium text-gray-900 bg-gray-100 hover:text-gray-900 hover:bg-gray-200">Accueil</router-Link>
 
-            </ul>
-        </div>
+                            <router-Link to="/dispo"
+                                class="px-3 py-2 rounded-md text-sm font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50">
+                                produits dispo</router-Link>
 
-        <slot />
+                            <router-Link to="/listes"
+                                class="px-3 py-2 rounded-md text-sm font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50">commandes</router-Link>
 
+                        </div>
+                    </div>
+                </div>
+                <div class="-mr-2 flex md:hidden">
+                    <!----dropdown-->
+                    <div class="relative" data-te-dropdown-ref>
+                        <a class="flex items-center whitespace-nowrap rounded px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-gray shadow-[0_4px_9px_-4px_#3b71ca] transition duration-150 ease-in-out hover:bg-primary-600 hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:bg-primary-600 focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:outline-none focus:ring-0 active:bg-primary-700 active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] motion-reduce:transition-none dark:shadow-[0_4px_9px_-4px_rgba(59,113,202,0.5)] dark:hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)]"
+                            href="#" type="button" id="dropdownMenuButton2" data-te-dropdown-toggle-ref
+                            aria-expanded="false" data-te-ripple-init data-te-ripple-color="light">
+                            <img src="../../../images/menu.png" alt="" class="w-8 h-8">
+                        </a>
+                        <ul class="absolute z-[1000] float-left m-0 hidden min-w-max list-none overflow-hidden rounded-lg border-none bg-white bg-clip-padding text-left text-base shadow-lg dark:bg-neutral-700 [&[data-te-dropdown-show]]:block"
+                            aria-labelledby="dropdownMenuButton2" data-te-dropdown-menu-ref>
+                            <li>
+                                <router-Link
+                                    class="block w-full whitespace-nowrap bg-transparent px-4 py-2 text-sm font-normal text-dark  active:text-neutral-800 active:no-underline disabled:pointer-events-none disabled:bg-transparent disabled:text-neutral-400 dark:text-neutral-200 dark:hover:bg-neutral-600"
+                                    to="/" data-te-dropdown-item-ref>Accueil</router-Link>
+                            </li>
+                            <li>
+                                <router-Link
+                                    class="block w-full whitespace-nowrap bg-transparent px-4 py-2 text-sm font-normal text-dark  active:text-neutral-800 active:no-underline disabled:pointer-events-none disabled:bg-transparent disabled:text-neutral-400 dark:text-neutral-200 dark:hover:bg-neutral-600"
+                                    to="/dispo" data-te-dropdown-item-ref>produit dispo</router-Link>
+                            </li>
+                            <li>
+                                <router-Link
+                                    class="block w-full whitespace-nowrap bg-transparent px-4 py-2 text-sm font-normal text-dark   active:no-underline disabled:pointer-events-none disabled:bg-transparent disabled:text-neutral-400 dark:text-neutral-200 dark:hover:bg-neutral-600"
+                                    to="/listes" data-te-dropdown-item-ref>commandes</router-Link>
+                            </li>
+                            <li>
+                                <p
+                                    class="cursor-pointer block w-full whitespace-nowrap bg-transparent px-4 py-2 text-sm font-normal text-dark   active:no-underline disabled:pointer-events-none disabled:bg-transparent disabled:text-neutral-400 dark:text-neutral-200 dark:hover:bg-neutral-600"
+                                    to="/register" data-te-dropdown-item-ref>se deconnecter</p>
+                            </li>
 
+                        </ul>
+                    </div>
+                    <!----fin dropdown-->
+                </div>
+            </div>
+        </nav>
+    </header>
+ <slot/>
 
-
-    </div>
 </template>
-<script>
-export default {
-    name: 'Layout',
+<script setup>
+name : 'Layout'
+import { onMounted } from "vue";
+import {
+    Dropdown,
+    Ripple,
+    initTE,
+} from "tw-elements";
 
-    methods: {
-        ajouter() {
-            this.$router.push({ name: 'addproduct' })
-        },
-
-        home() {
-            this.$router.push({ name: 'dashboard' })
-        },
-        liste() {
-            this.$router.push({ name: 'listes' })
-        },
-        dispo() {
-            this.$router.push({ name: 'dispo' })
-        }
-    }
-}
+onMounted(() => {
+    initTE({
+        Dropdown,
+        Ripple
+    });
+});
 </script>
 
-<style>
-body {
-    background-color: #f4f4f5;
-}
+<script>
 
-.wrapper {
-    display: flex;
-    position: relative;
-}
-
-.wrapper .sidebar {
-    width: 200px;
-    height: 100%;
-    background: #072541;
-    padding: 30px 0px;
-    position: fixed;
-}
-
-.wrapper .sidebar h2 {
-    color: #fff;
-    text-transform: uppercase;
-    text-align: center;
-    margin-bottom: 30px;
-}
-
-.wrapper .sidebar ul li {
-    padding: 15px;
-    border-bottom: 1px solid #bdb8d7;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
-    border-top: 1px solid rgba(255, 255, 255, 0.05);
-}
-
-.wrapper .sidebar ul li a {
-    color: #fff;
-    display: block;
-}
-
-.wrapper .sidebar ul li a .fas {
-    width: 25px;
-}
-
-.wrapper .sidebar ul li:hover {
-    background-color: #94a3b8;
-}
-
-.wrapper .sidebar ul li:hover a {
-    color: #fff;
-}
+</script>
 
 
-
-.wrapper .main_content {
-    width: 100%;
-    margin-left: 200px;
-}
-
-.wrapper .main_content .header {
-    padding: 20px;
-    background: #f97316;
-    color: white;
-    border-bottom: 1px solid #e0e4e8;
-}
-
-.wrapper .main_content .info {
-    margin: 20px;
-    color: black;
-    line-height: 25px;
-}
-
-.wrapper .main_content .info div {
-    margin-bottom: 20px;
-}
-</style> 

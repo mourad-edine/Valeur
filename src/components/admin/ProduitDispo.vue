@@ -1,12 +1,9 @@
 <template>
     <Layout>
-        <div class="main_content">
-            <div class="header">DASHBOARD > Accueil</div>
-            <div class="info">
+        <div class="main_content" style="margin-top: 100px;">
                 <div>
-                    <div class="flex justify-between">
+                    <div class="flex justify-around">
                         <h1 class="text-2xl">
-                            categorie de produits
                         </h1>
                         <!-----modal------->
                         <p class="p-2 bg-blue-500 rounded text-white cursor-pointer" data-bs-toggle="modal"
@@ -40,8 +37,8 @@
                         <!-----fin modal-->
                     </div>
                     <hr class="m-2">
-                    <div class="m-10">
-                        <table class="table">
+                    <div class="m-10 flex justify-center">
+                        <table class="table" style="width: 700px;">
                             <thead>
                                 <tr>
                                     <th scope="col">id</th>
@@ -71,7 +68,6 @@
                     </div>
                 </div>
             </div>
-        </div>
     </Layout>
 </template>
 
