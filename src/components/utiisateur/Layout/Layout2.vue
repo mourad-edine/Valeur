@@ -3,8 +3,9 @@
         <nav class="mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex items-center justify-between h-16">
                 <div class="flex items-center">
-                    <router-Link  class="flex-shrink-0" to="/home">
+                    <router-Link  class="flex" to="/home">
                         <img class="h-12 w-12" src="../../../images/panier.png" alt="Workflow logo">
+                        <p class="text-red-700 font-semibold text-lg">{{ nombre }}</p>
                     </router-Link>
                     <div class="hidden md:block">
                         <div class="ml-10 flex items-baseline space-x-4">
@@ -45,7 +46,7 @@
 
                             <li>
                                 <p
-                                   @click="deconnecter" class="block w-full whitespace-nowrap bg-transparent px-4 py-2 text-sm font-normal text-dark   active:no-underline disabled:pointer-events-none disabled:bg-transparent disabled:text-neutral-400 dark:text-neutral-200 dark:hover:bg-neutral-600"
+                                   @click="deconnecter" class="cursor-pointer block w-full whitespace-nowrap bg-transparent px-4 py-2 text-sm font-normal text-dark   active:no-underline  disabled:bg-transparent disabled:text-neutral-400 dark:text-neutral-200 dark:hover:bg-neutral-600"
                                     data-te-dropdown-item-ref>se deconnecter
                                 </p>
                             </li>
@@ -63,13 +64,40 @@
 </template>
 
 <script>
+import axios from 'axios'
 export default{
     name : 'Layout2',
+    data(){
+        return{
+            nombre : null
+        }
+    },
     methods : {
         deconnecter(){
             localStorage.clear()
             this.$router.push({name : 'simple'})
-        }
+        },
+        async fetchData() {
+            let user = localStorage.getItem('client_id')
+            this.im = JSON.parse(user).id
+            await axios.get(`http://127.0.0.1:8000/api/compter/${this.im}`)
+                .then((response) => {
+                    this.nombre = response.data.utilisateur;
+                })
+                .catch(error => {
+                    console.error('Erreur lors de la récupération des données:', error);
+                });
+        },
+       
+    },
+    mounted(){
+        this.fetchData()
+    },
+    watch: {
+    nombre: function () {
+      this.nombre
+    },
     }
+
 }
 </script>
