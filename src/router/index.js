@@ -13,6 +13,7 @@ import dispo from '../components/admin/ProduitDispo.vue'
 import sous from '../components/admin/sousproduit.vue'
 import supplement from '../components/admin/supplement.vue'
 import dashboard from '../components/admin/Dashboard.vue'
+import create from '../components/simple/create.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -93,6 +94,13 @@ const router = createRouter({
       name: 'supplement',
       component: supplement
     },
+
+    {
+      path: '/create/:id',
+      name: 'create',
+      component: create
+    },
+
 
   ]
 })

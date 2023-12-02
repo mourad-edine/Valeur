@@ -21,15 +21,10 @@ export default {
                     this.valide = reponse.data.supplements;
                 });
         },
-        affiche() {
-            Swal.fire({
-                position: 'top-end',
-                icon: 'info',
-                title: 'vous devez avoir un compte pour commander',
-                showConfirmButton: false,
-                timer: 1500
-            });
-        }
+        informationId(id) {
+            this.$router.push({ name: 'create', params: { id } });
+        },
+    
     },
     mounted() {
         this.Obtenir(this.$route.params.id);
@@ -46,7 +41,7 @@ export default {
             </div>
             <hr class="m-2">
             <div class="sm:grid grid-cols-2">
-                <div class="sm:flex sm:ml-20 shadow-md cursor-pointer" v-for="item in valide" @click="affiche">
+                <div class="sm:flex sm:ml-20 shadow-md cursor-pointer" v-for="item in valide" @click="informationId(item.id)">
                     <div class="w-20 h-20">
                         <img src="../../images/app.png" alt="" class="w-16 sm:h-12 m-2">
                     </div>

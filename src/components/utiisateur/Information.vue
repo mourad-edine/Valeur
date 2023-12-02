@@ -15,10 +15,10 @@
             <p class="text-lg m-1">supplements</p>
             <hr class="m-2">
             <div class="form-check" v-for="(test, ind) in informe" :key="ind">
-              <input class="form-check-input" type="checkbox" :value="test.prix" :id="'test.nom_supplement' + ind"
+              <input class="form-check-input" type="checkbox" :value="test.prix" :id="'test.nom_supplement' + ind +'test.prix'"
                 v-model="suppl">
 
-              <label class="form-check-label" :for="'test.nom_supplement' + ind">
+              <label class="form-check-label" :for="'test.nom_supplement' + ind + 'test.prix'">
                 {{ test.nom_supplement }} - {{ test.prix }} $
               </label>
             </div>
