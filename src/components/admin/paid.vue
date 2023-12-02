@@ -1,9 +1,8 @@
 <script>
-import Swal from 'sweetalert2';
 import Layout from './layout/Layout.vue';
 import axios from 'axios';
 export default {
-    name: 'Liste',
+    name: 'Nopaid',
     components: {
         Layout
     },
@@ -14,7 +13,7 @@ export default {
     },
     methods: {
         async fetchData() {
-            await axios.get('http://127.0.0.1:8000/api/hote')
+            await axios.get('http://127.0.0.1:8000/api/hote2')
                 .then((response) => {
                     this.users = response.data.utilisateur;
                 })
@@ -23,26 +22,11 @@ export default {
                 });
         },
 
-        async payer(id) {
-            let url = `http://127.0.0.1:8000/api/payement/${id}`;
-            await axios.post(url)
-                .then(reponse => {
-                    console.log(reponse);
-                });
-            Swal.fire({
-                position: 'top-end',
-                icon: 'success',
-                title: 'payement effectué',
-                showConfirmButton: false,
-                timer: 500
-            });
-            this.fetchData();
-        },
+        
 
-        informationId(id) {
-            this.$router.push({ name: 'detail', params: { id } });
+        naviguer() {
+            this.$router.push({ name: 'listes' });
         },
-
     },
     mounted() {
         this.fetchData();
@@ -119,13 +103,13 @@ export default {
                                         {{ user.created_at }}
                                     </td>
                                     <td>
-                                        <a @click="informationId(user.id)" href="" class="p-1 bg-green-500 text-white rounded-lg mb-1 cursor-pointer">
+                                        <a href="" class="p-1 bg-green-500 text-white rounded-lg mb-1 cursor-pointer">
                                             details
                                         </a>
                                     </td>
                                     <td>
-                                        <a @click="payer(user.id)" class="p-1 rounded bg-yellow-400 text-white m-2 cursor-pointer">
-                                            valider
+                                        <a href="#" class="p-1 rounded bg-gray-400 text-white m-2">
+                                            payé
                                         </a>
                                     </td>
 

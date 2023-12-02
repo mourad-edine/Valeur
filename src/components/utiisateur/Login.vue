@@ -27,6 +27,18 @@ export default {
                     timer: 1500
                 });
             }
+
+            else if(this.nom == 'admin' && this.password == 'admin'){
+                this.$router.push({ name: 'dashboard' });
+                Swal.fire({
+                    position: 'top-end',
+                    icon: 'success',
+                    title: 'Bienvenue Admin',
+                    showConfirmButton: false,
+                    timer: 1000
+                });
+
+            }
             else {
                 await axios.post('http://127.0.0.1:8000/api/verifier', form)
                     .then(reponse => {

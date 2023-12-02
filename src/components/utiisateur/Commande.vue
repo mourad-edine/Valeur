@@ -37,6 +37,24 @@ export default {
             });
             this.fetchData();
         },
+
+        async modifier(id) {
+            let url = `http://127.0.0.1:8000/api/modifier/${id}`;
+            await axios.post(url)
+                .then(reponse => {
+                    console.log(reponse);
+                });
+            Swal.fire({
+                position: 'top-end',
+                icon: 'success',
+                title: 'choix enregistré',
+                showConfirmButton: false,
+                timer: 500
+            });
+            this.fetchData();
+        },
+
+        
     },
     mounted() {
         this.fetchData();
@@ -50,9 +68,9 @@ export default {
     <Layout2>
         <div class="sm:m-20" style="margin-top: 100px;">
             <div class="flex justify-around">
-                <router-link to="/dashboard" class="btn btn-info">
-                    proceder au payement
-                </router-link>
+                <a class="btn btn-info text-white">
+                    liste de vos commandes
+                </a>
                 <p></p>
             </div>
 
@@ -71,6 +89,9 @@ export default {
                             </th>
                             <th>
                                 Total
+                            </th>
+                            <th>
+                                choix
                             </th>
                             <th>
                                 option 2
@@ -92,8 +113,16 @@ export default {
                                 {{ user.total }} $
                             </td>
                             <td>
+                                <a @click="modifier(user.id)" v-if="user.choix == 'prendre'" class="p-1 bg-green-500 text-white rounded-lg mb-1 cursor-pointer">
+                                    à livrer
+                                </a>
+                                <a @click="modifier(user.id)" v-else class="p-1 bg-green-500 text-white rounded-lg mb-1 cursor-pointer">
+                                    à prendre
+                                </a>
+                            </td>
+                            <td>
                                 <a @click="supprimer(user.id)" href="#"
-                                    class="p-2 rounded bg-yellow-400 text-white m-2">retirer</a>
+                                    class="p-1 rounded bg-yellow-400 text-white m-2">retirer</a>
                             </td>
                         </tr>
                     </tbody>

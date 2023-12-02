@@ -3,25 +3,27 @@ import Swal from 'sweetalert2';
 import Layout from './layout/Layout.vue';
 import axios from 'axios';
 export default {
-    name: 'Liste',
+    name: 'Detail',
     components: {
         Layout
     },
     data() {
         return {
-            users: []
+            users: {},
         };
     },
     methods: {
-        async fetchData() {
-            await axios.get('http://127.0.0.1:8000/api/hote')
+        async fetchData(id) {
+            await axios.get(`http://127.0.0.1:8000/api/commandeinfo/${id}`)
                 .then((response) => {
-                    this.users = response.data.utilisateur;
+                    this.users = response.data.info;
+
                 })
                 .catch(error => {
                     console.error('Erreur lors de la récupération des données:', error);
                 });
         },
+
 
         async payer(id) {
             let url = `http://127.0.0.1:8000/api/payement/${id}`;
@@ -36,17 +38,13 @@ export default {
                 showConfirmButton: false,
                 timer: 500
             });
-            this.fetchData();
-        },
-
-        informationId(id) {
-            this.$router.push({ name: 'detail', params: { id } });
+            this.fetchData(this.$route.params.id);
         },
 
     },
     mounted() {
-        this.fetchData();
-        setInterval(this.fetchData, 5000)
+        this.fetchData(this.$route.params.id);
+        console.log(this.users)
     },
 
 }
@@ -66,8 +64,44 @@ export default {
                             </router-link>
                         </div>
                     </h1>
+                    <div class="flex justify-around m-2">
+                        <h1 class="text-lg font-semibold">information client</h1>
+                    </div>
+                    <div class="m-10 flex justify-center">
+                        <table class="table" style="width: 900px;">
+                            <thead class="bg-dark text-white">
+                                <tr>
+                                    <th>
+                                        id
+                                    </th>
+                                    <th>
+                                        nom
+                                    </th>
+                                    <th>
+                                        adresse
+                                    </th>
+                
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-gray-200">
+                                <tr>
+                                    <td>
+                                        {{}}
+                                    </td>
+                                    <td>
+                                        {{}}
+                                    </td>
+                                    <td>
+                                        {{}}
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
                     <hr class="m-2">
-
+                    <div class="flex justify-around m-2">
+                        <h1 class="text-lg font-semibold">detail de la commande</h1>
+                    </div>
                     <div class="m-10 flex justify-center">
                         <table class="table" style="width: 900px;">
                             <thead class="bg-dark text-white">
@@ -93,38 +127,32 @@ export default {
                                     <th>
                                         options 1
                                     </th>
-                                    <th>
-                                        option 2
-                                    </th>
                                 </tr>
                             </thead>
                             <tbody class="divide-y divide-gray-200">
-                                <tr v-for="user in users" :key="user.id">
+                                <tr v-if="users.designation != null">
                                     <td>
-                                        {{ user.designation }}
+                                        {{ users.designation }}
                                     </td>
                                     <td>
-                                        {{ user.nombre }}
+                                        {{ users.nombre }}
                                     </td>
                                     <td>
-                                        {{ user.prix_unitaire }}$
+                                        {{ users.prix_unitaire }}$
                                     </td>
                                     <td>
-                                        {{ user.total }} $
+                                        {{ users.total }} $
                                     </td>
                                     <td>
-                                        à {{ user.choix }}
+                                        à {{ users.choix }}
                                     </td>
                                     <td>
-                                        {{ user.created_at }}
+                                        {{ users.created_at }}
                                     </td>
+
                                     <td>
-                                        <a @click="informationId(user.id)" href="" class="p-1 bg-green-500 text-white rounded-lg mb-1 cursor-pointer">
-                                            details
-                                        </a>
-                                    </td>
-                                    <td>
-                                        <a @click="payer(user.id)" class="p-1 rounded bg-yellow-400 text-white m-2 cursor-pointer">
+                                        <a @click="payer(this.$route.params.id)"
+                                            class="p-1 rounded bg-yellow-400 text-white m-2 cursor-pointer">
                                             valider
                                         </a>
                                     </td>

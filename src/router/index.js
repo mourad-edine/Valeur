@@ -13,7 +13,10 @@ import dispo from '../components/admin/ProduitDispo.vue'
 import sous from '../components/admin/sousproduit.vue'
 import supplement from '../components/admin/supplement.vue'
 import dashboard from '../components/admin/Dashboard.vue'
+import Nopaid from '../components/admin/paid.vue'
 import create from '../components/simple/create.vue'
+import Detail from '../components/admin/detail.vue'
+
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -25,9 +28,22 @@ const router = createRouter({
     },
 
     {
+      path: '/detail/:id',
+      name: 'detail',
+      component: Detail
+    },
+
+
+    {
       path: '/liste',
       name: 'liste',
       component: Command
+    },
+
+    {
+      path: '/paid',
+      name: 'paid',
+      component: Nopaid
     },
     {
       path: '/info/:id',

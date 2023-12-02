@@ -1,73 +1,78 @@
 <template>
     <Layout>
         <div class="main_content" style="margin-top: 100px;">
-                <div>
-                    <div class="flex justify-around">
-                        <h1 class="text-2xl">
-                        </h1>
-                        <!-----modal------->
-                        <p class="p-2 bg-blue-500 rounded text-white cursor-pointer" data-bs-toggle="modal"
-                            data-bs-target="#exampleModal">
-                            ajouter categorie
-                        </p>
+            <div>
+                <div class="flex justify-around">
+                    <h1 class="text-2xl">
+                    </h1>
+                    <!-----modal------->
+                    <p class="p-2 bg-blue-500 rounded text-white cursor-pointer" data-bs-toggle="modal"
+                        data-bs-target="#exampleModal">
+                        ajouter categorie
+                    </p>
 
-                        <!-- Modal -->
-                        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
-                            aria-hidden="true">
-                            <div class="modal-dialog">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h5 class="modal-title" id="exampleModalLabel">ajouter categorie</h5>
-                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                            aria-label="Close"></button>
-                                    </div>
-                                    <div class="modal-body">
-                                        <input type="text" placeholder="nom categorie" class="form-control"
-                                            v-model="anarana" required>
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="p-2 bg-orange-500 rounded text-white"
-                                            data-bs-dismiss="modal">annuler</button>
-                                        <button type="button" class="p-2 bg-blue-500 rounded text-white"
-                                            data-bs-dismiss="modal" @click="ajouter">ajouter</button>
-                                    </div>
+                    <!-- Modal -->
+                    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                        aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel">ajouter categorie</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                        aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <input type="text" placeholder="nom categorie" class="form-control" v-model="anarana"
+                                        required>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="p-2 bg-orange-500 rounded text-white"
+                                        data-bs-dismiss="modal">annuler</button>
+                                    <button type="button" class="p-2 bg-blue-500 rounded text-white" data-bs-dismiss="modal"
+                                        @click="ajouter">ajouter</button>
                                 </div>
                             </div>
                         </div>
-                        <!-----fin modal-->
                     </div>
-                    <hr class="m-2">
-                    <div class="m-10 flex justify-center">
-                        <table class="table" style="width: 700px;">
-                            <thead>
-                                <tr>
-                                    <th scope="col">id</th>
-                                    <th scope="col">nom produits</th>
-                                    <th scope="col">description</th>
-                                    <th scope="col">date de creation</th>
-                                    <th>
-                                        option 1
-                                    </th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr v-for="item in produits">
-                                    <th scope="row">{{ item.id }}</th>
-                                    <td>{{ item.nom }}</td>
-                                    <td>{{ item.created_at }}</td>
-                                    <td>
-                                        <p class="text-info cursor-pointer" @click="informationId(item.id)">sous-categories
-                                        </p>
-                                    </td>
-                                    <td>
-                                        <p @click="supprimer(item.id)" class="text-danger cursor-pointer">supprimer</p>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
+                    <!-----fin modal-->
+                </div>
+                <hr class="m-2">
+                <div class="m-10 flex justify-center">
+                    <table class="table" style="width: 700px;">
+                        <thead>
+                            <tr>
+                                <th scope="col">id</th>
+                                <th scope="col">nom produits</th>
+                                <th scope="col">description</th>
+                                <th scope="col">date de creation</th>
+                                <th>
+                                    option 1
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr v-for="item in produits">
+                                <th scope="row">{{ item.id }}</th>
+                                <td>{{ item.nom }}</td>
+                                <td>{{ item.created_at }}</td>
+                                <td>
+                                    <a @click="informationId(item.id)"
+                                        class="p-1 bg-green-500 text-white rounded-lg mb-1 cursor-pointer">
+                                        sous-categorie
+                                    </a>
+                                </td>
+                                <td>
+                                    <a @click="supprimer(item.id)"
+                                        class="p-1 bg-red-500 text-white rounded-lg mb-1 cursor-pointer">
+                                        supprimer
+                                    </a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
             </div>
+        </div>
     </Layout>
 </template>
 
@@ -150,7 +155,7 @@ export default {
 
         async supprimer(id) {
             let url = `http://127.0.0.1:8000/api/deleteprod/${id}`
-           await axios.delete(url)
+            await axios.delete(url)
                 .then(reponse => {
                     console.log(reponse)
                 })
@@ -171,7 +176,7 @@ export default {
 
     mounted() {
         this.Prod();
-        
+
     },
 }
 </script>

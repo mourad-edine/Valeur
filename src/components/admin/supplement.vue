@@ -86,7 +86,7 @@ export default {
                 timer: 1000
             })
 
-            this.$router.push({name : 'dispo'})
+            this.$router.push({ name: 'dispo' })
         }
 
 
@@ -102,68 +102,71 @@ export default {
 <template>
     <Layout>
         <div class="main_content" style="margin-top: 100px;">
-                <div>
-                    <div class="flex justify-around">
-                        <h1 class="text-xl">
-                        </h1>
-                        <!---modal-->
-                        <p class="p-2 bg-blue-500 rounded text-white cursor-pointer" data-bs-toggle="modal"
-                            data-bs-target="#exampleModal">
-                            ajouter supplement
-                        </p>
+            <div>
+                <div class="flex justify-around">
+                    <h1 class="text-xl">
+                    </h1>
+                    <!---modal-->
+                    <p class="p-2 bg-blue-500 rounded text-white cursor-pointer" data-bs-toggle="modal"
+                        data-bs-target="#exampleModal">
+                        ajouter supplement
+                    </p>
 
-                        <!-- Modal -->
-                        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
-                            aria-hidden="true">
-                            <div class="modal-dialog">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h5 class="modal-title" id="exampleModalLabel">ajouter sous-categorie</h5>
-                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                            aria-label="Close"></button>
-                                    </div>
-                                    <div class="modal-body">
-                                        <input type="text" placeholder="nom sous-categorie" class="form-control  m-2"
-                                            v-model="anarana" required>
-                                        <input type="text" placeholder="prix" class="form-control  m-2" v-model="price"
-                                            required>
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="p-2 bg-orange-500 rounded text-white"
-                                            data-bs-dismiss="modal">annuler</button>
-                                        <button type="button" class="p-2 bg-blue-500 rounded text-white"
-                                            data-bs-dismiss="modal" @click="ajouter">ajouter</button>
-                                    </div>
+                    <!-- Modal -->
+                    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                        aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel">ajouter sous-categorie</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                        aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <input type="text" placeholder="nom sous-categorie" class="form-control  m-2"
+                                        v-model="anarana" required>
+                                    <input type="text" placeholder="prix" class="form-control  m-2" v-model="price"
+                                        required>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="p-2 bg-orange-500 rounded text-white"
+                                        data-bs-dismiss="modal">annuler</button>
+                                    <button type="button" class="p-2 bg-blue-500 rounded text-white" data-bs-dismiss="modal"
+                                        @click="ajouter">ajouter</button>
                                 </div>
                             </div>
                         </div>
+                    </div>
 
-                    </div>
-                    <div class="m-10 flex justify-center">
-                        <table class="table" style="width: 700px;">
-                            <thead>
-                                <tr>
-                                    <th scope="col">id</th>
-                                    <th scope="col">nom supplement</th>
-                                    <th scope="col">prix</th>
-                                    <th scope="col">date de creation</th>
-                                    <th>option</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr v-for="item in valide">
-                                    <th scope="row">{{ item.id }}</th>
-                                    <td>{{ item.nom_supplement }}</td>
-                                    <td>{{ item.prix }} $</td>
-                                    <td>{{ item.created_at }}</td>
-                                    <td>
-                                        <p @click="supprimer(item.id)" class="text-danger cursor-pointer">supprimer</p>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
+                </div>
+                <div class="m-10 flex justify-center">
+                    <table class="table" style="width: 700px;">
+                        <thead>
+                            <tr>
+                                <th scope="col">id</th>
+                                <th scope="col">nom supplement</th>
+                                <th scope="col">prix</th>
+                                <th scope="col">date de creation</th>
+                                <th>option</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr v-for="item in valide">
+                                <th scope="row">{{ item.id }}</th>
+                                <td>{{ item.nom_supplement }}</td>
+                                <td>{{ item.prix }} $</td>
+                                <td>{{ item.created_at }}</td>
+                                <td>
+                                    <a @click="supprimer(item.id)"
+                                        class="p-1 bg-red-500 text-white rounded-lg mb-1 cursor-pointer">
+                                        supprimer
+                                    </a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
             </div>
+        </div>
     </Layout>
 </template>
