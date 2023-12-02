@@ -5,12 +5,15 @@ import Layout2 from './Layout/Layout2.vue';
 export default {
     data() {
         return {
-            users: []
+            users: [],
+            im: null
         };
     },
     methods: {
         async fetchData() {
-            await axios.get('http://127.0.0.1:8000/api/hote')
+            let user = localStorage.getItem('client_id')
+            this.im = JSON.parse(user).id
+            await axios.get(`http://127.0.0.1:8000/api/perso/${this.im}`)
                 .then((response) => {
                     this.users = response.data.utilisateur;
                 })
@@ -37,6 +40,7 @@ export default {
     },
     mounted() {
         this.fetchData();
+
     },
     components: { Layout2 }
 }
