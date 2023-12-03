@@ -40,7 +40,7 @@ export default {
                     .then(reponse => {
                     console.log(reponse);
                 });
-                this.$router.push({ name: 'home' });
+                this.$router.push({ name: 'login' });
                 Swal.fire({
                     position: 'top-end',
                     icon: 'success',

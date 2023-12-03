@@ -114,10 +114,10 @@ export default {
                             </td>
                             <td>
                                 <a @click="modifier(user.id)" v-if="user.choix == 'prendre'" class="p-1 bg-green-500 text-white rounded-lg mb-1 cursor-pointer">
-                                    à livrer
+                                    à livrer?
                                 </a>
                                 <a @click="modifier(user.id)" v-else class="p-1 bg-green-500 text-white rounded-lg mb-1 cursor-pointer">
-                                    à prendre
+                                    à prendre?
                                 </a>
                             </td>
                             <td>

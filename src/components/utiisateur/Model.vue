@@ -13,7 +13,7 @@
                     </div>
                     <div class="ml-5 mt-2 mb-2">
                         <p class="text-red-700 font-bold">{{ item.nom }}</p>
-                        <p class="font-semibold">18 Août 2019</p>
+                        <p class="font-semibold opacity-70">Disponible</p>
 
                     </div>
                 </div>

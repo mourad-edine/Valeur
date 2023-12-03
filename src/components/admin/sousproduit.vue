@@ -81,6 +81,8 @@ export default {
                     showConfirmButton: false,
                     timer: 1000
                 })
+                this.anarana =''
+                this.price =''
 
                 this.Obtenir(this.$route.params.id)
             }

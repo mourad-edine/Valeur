@@ -42,7 +42,7 @@
                         <thead>
                             <tr>
                                 <th scope="col">id</th>
-                                <th scope="col">nom produits</th>
+                                <th scope="col">catégorie</th>
                                 <th scope="col">description</th>
                                 <th scope="col">date de creation</th>
                                 <th>
@@ -137,7 +137,7 @@ export default {
                     showConfirmButton: false,
                     timer: 1000
                 })
-
+                this.anarana =''
                 this.Prod()
             }
 

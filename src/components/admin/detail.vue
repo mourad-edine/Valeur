@@ -86,7 +86,7 @@ export default {
                     <div class="flex justify-around m-2">
                         <h1 class="text-lg font-semibold opacity-70">information client</h1>
                     </div>
-                    <div class="m-10 flex justify-center">
+                    <div class="m-5 flex justify-center">
                         <table class="table" style="width: 900px;">
                             <thead class="bg-dark text-white">
                                 <tr>
@@ -117,11 +117,11 @@ export default {
                             </tbody>
                         </table>
                     </div>
-                    <hr class="m-2">
-                    <div class="flex justify-around m-2">
+                    <hr class="m-1">
+                    <div class="flex justify-around">
                         <h1 class="text-lg font-semibold opacity-70">detail de la commande</h1>
                     </div>
-                    <div class="m-10 flex justify-center">
+                    <div class="m-5 flex justify-center">
                         <table class="table" style="width: 900px;">
                             <thead class="bg-dark text-white">
                                 <tr>
