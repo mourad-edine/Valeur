@@ -30,7 +30,6 @@ export default {
     },
     mounted() {
         this.fetchData();
-        setInterval(this.fetchData, 5000)
     },
 
 }
@@ -78,7 +77,7 @@ export default {
                                         options 1
                                     </th>
                                     <th>
-                                        option 2
+                                        état
                                     </th>
                                 </tr>
                             </thead>
